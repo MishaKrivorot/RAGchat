@@ -1,0 +1,29 @@
+# Віртуальні середовища
+.venv/
+venv/
+env/
+
+# Змінні оточення (ТУТ ТВОЇ API КЛЮЧІ)
+.env
+
+# Кеш Python
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+
+# Локальні бази даних та файли (якщо Qdrant зберігає щось локально)
+qdrant_storage/
+*.db
+*.sqlite3
+
+# Системні файли (Windows/Mac)
+.DS_Store
+Thumbs.db
+
+# Налаштування редакторів (VS Code, PyCharm)
+.vscode/
+.idea/
+???.txt
+
+*.txt

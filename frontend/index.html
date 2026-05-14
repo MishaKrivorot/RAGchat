@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="uk">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>FAQ Chatbot — Університет</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body class="dark">
+  <svg id="stars"></svg>
+
+  <div class="comet" style="top:-20%; left:-30%; animation-delay:0s;"></div>
+  <div class="comet" style="top:-30%; left:-15%; animation-delay:2s;"></div>
+  <div class="comet" style="top:-10%; left:-25%; animation-delay:4s;"></div>
+
+  <img id="ship1" class="ship" src="nlo.png" alt="UFO">
+  <img id="ship2" class="ship" src="rocket.png" alt="Rocket">
+
+  <button class="theme-toggle" id="themeIcon" type="button" aria-label="Змінити тему">🌙</button>
+
+  <main class="page">
+    <header class="hero">
+      <img src="logo.png" class="logo" alt="Logo">
+      <h1>FAQ Chatbot — Університет</h1>
+      <p class="subtitle">
+        Семантичний пошук по базі знань з новою бекенд-архітектурою
+      </p>
+    </header>
+
+    <section class="chat-wrapper">
+      <div class="chat-topbar">
+        <div>
+          <h2>Чат</h2>
+          <p class="chat-hint">Постав питання щодо вступу, навчання або розкладу</p>
+        </div>
+        <div class="api-badge" id="apiBadge">API: offline</div>
+      </div>
+
+      <div class="messages" id="messages"></div>
+
+      <form id="chatForm" class="chat-form">
+        <input id="q" type="text" placeholder="Напишіть питання..." autocomplete="off" />
+        <button id="send" type="submit">Надіслати</button>
+      </form>
+    </section>
+  </main>
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <script src="script.js"></script>
+</body>
+
+</html>
