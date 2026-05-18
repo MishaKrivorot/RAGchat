@@ -9,3 +9,5 @@ pypdf
 requests
 beautifulsoup4
 lxml
+groq
+duckduckgo-search
