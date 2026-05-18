@@ -4,7 +4,7 @@ from app.config import settings
 
 class EmbeddingService:
     def __init__(self) -> None:
-        self.model = TextEmbedding(model_name=settings.EMBEDDING_MODEL, threads=1)
+        self.model = TextEmbedding(model_name=settings.EMBEDDING_MODEL)
 
     def embed_text(self, text: str) -> list[float]:
         return list(self.model.embed([text]))[0].tolist()
