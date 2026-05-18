@@ -1,5 +1,5 @@
 from pydantic import BaseModel, Field
-from typing import List, Optional
+from typing import List, Optional, Union # Додали Union
 
 
 class QueryRequest(BaseModel):
@@ -8,6 +8,9 @@ class QueryRequest(BaseModel):
 
 
 class SourceItem(BaseModel):
+    id: Union[str, int, None] = None
+    likes: int = 0
+    dislikes: int = 0                    # <--- ДОДАЛИ ДИЗЛАЙКИ
     question: Optional[str] = ""
     answer: str
     score: float
@@ -16,10 +19,14 @@ class SourceItem(BaseModel):
     title: Optional[str] = ""
     reranked_score: Optional[float] = None
 
-
 class ChatResponse(BaseModel):
     reply: str
     mode: str
     confidence: float
     sources: List[SourceItem] = []
     fallback_links: Optional[List[dict]] = None
+
+class FeedbackRequest(BaseModel):
+    id: str | int
+    source_type: str
+    action: str

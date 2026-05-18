@@ -67,12 +67,15 @@ class QdrantService:
                 continue
             payload = item.payload or {}
             results.append({
-                "question": payload.get("question", ""),
-                "answer": payload.get("answer", ""),
+                "id": item.id,                                  
+                "likes": payload.get("likes", 0),
+                "dislikes": payload.get("dislikes", 0),               
+                "question": payload.get("question", payload.get("title", "")),
+                "answer": payload.get("text", payload.get("answer", "")),
                 "score": float(item.score),
-                "source_type": "faq",
+                "source_type": "site", # (або "site" для колекції сайту)
                 "url": payload.get("url", ""),
-                "title": payload.get("question", "")
+                "title": payload.get("title", "")
             })
 
         # SITE
@@ -82,11 +85,13 @@ class QdrantService:
                 continue
             payload = item.payload or {}
             results.append({
-                # ВИПРАВЛЕНО: Тепер пріоритет у згенерованого питання
-                "question": payload.get("question", payload.get("title", "")), 
-                "answer": payload.get("text", ""),
+                "id": item.id,                                   # <-- НОВЕ
+                "likes": payload.get("likes", 0),
+                "dislikes": payload.get("dislikes", 0),               # <-- НОВЕ
+                "question": payload.get("question", payload.get("title", "")),
+                "answer": payload.get("text", payload.get("answer", "")),
                 "score": float(item.score),
-                "source_type": "site",
+                "source_type": "site", # (або "site" для колекції сайту)
                 "url": payload.get("url", ""),
                 "title": payload.get("title", "")
             })
@@ -104,9 +109,11 @@ class QdrantService:
                 continue
             payload = item.payload or {}
             results.append({
-                # ВИПРАВЛЕНО: Тепер пріоритет у згенерованого питання
+                "id": item.id,                                   
+                "likes": payload.get("likes", 0),
+                "dislikes": payload.get("dislikes", 0),               
                 "question": payload.get("question", payload.get("title", "")),
-                "answer": payload.get("text", ""),
+                "answer": payload.get("text", payload.get("answer", "")),
                 "score": float(item.score),
                 "source_type": "site",
                 "url": payload.get("url", ""),
@@ -121,3 +128,27 @@ class QdrantService:
             with_payload=True
         )
         return records
+    # 🔥 НОВИЙ МЕТОД ДЛЯ ЛАЙКІВ
+    # 🔥 МЕТОД ДЛЯ ЛАЙКІВ ТА ДИЗЛАЙКІВ
+    def submit_feedback(self, point_id: int | str, collection_name: str, action: str) -> dict:
+        if isinstance(point_id, str) and point_id.isdigit():
+            point_id = int(point_id)
+        points = self.client.retrieve(collection_name=collection_name, ids=[point_id])
+        if not points:
+            return {"likes": 0, "dislikes": 0}
+        
+        payload = points[0].payload or {}
+        likes = payload.get("likes", 0)
+        dislikes = payload.get("dislikes", 0)
+        
+        if action == "like":
+            likes += 1
+        elif action == "dislike":
+            dislikes += 1
+            
+        self.client.set_payload(
+            collection_name=collection_name,
+            payload={"likes": likes, "dislikes": dislikes},
+            points=[point_id]
+        )
+        return {"likes": likes, "dislikes": dislikes}

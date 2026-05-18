@@ -27,7 +27,7 @@ class SiteCrawlerService:
 
         bad_suffixes = (
             ".jpg", ".jpeg", ".png", ".gif", ".svg",
-            ".doc", ".docx", ".xls", ".xlsx", ".zip", ".rar"
+            ".doc", ".docx", ".xls", ".xlsx", ".zip", ".rar", ".pdf"
         )
         if parsed.path.lower().endswith(bad_suffixes):
             return False
@@ -38,42 +38,17 @@ class SiteCrawlerService:
         parsed = urlparse(url)
         return f"{parsed.scheme}://{parsed.netloc}{parsed.path}".rstrip("/")
 
-    def _extract_pdf_text(self, url: str) -> tuple[str, str]:
-        try:
-            import pymupdf4llm
-            import tempfile
-            import os
-
-            response = self.session.get(url, timeout=self.timeout)
-            response.raise_for_status()
-
-            # Зберігаємо файл тимчасово, оскільки pymupdf4llm працює з файловою системою
-            with tempfile.NamedTemporaryFile(delete=False, suffix=".pdf") as tmp:
-                tmp.write(response.content)
-                tmp_path = tmp.name
-
-            # Магія: конвертуємо PDF у Markdown зі збереженням таблиць!
-            md_text = pymupdf4llm.to_markdown(tmp_path)
-            os.remove(tmp_path)
-
-            title = url.split("/")[-1]
-            if not title:
-                title = "Документ розкладу/сесії"
-
-            return title, md_text.strip()
-        except ImportError:
-            print(f"pymupdf4llm не встановлено. Не можу обробити {url}")
-            return "PDF Document", ""
-        except Exception as e:
-            print(f"Помилка обробки PDF {url}: {e}")
-            return "PDF Document", ""
-
     def _extract_text(self, html: str) -> tuple[str, str]:
+        from bs4 import BeautifulSoup
+        from urllib.parse import urljoin 
+        
         soup = BeautifulSoup(html, "lxml")
 
+        # 1. Видаляємо технічні та непотрібні теги
         for tag in soup(["script", "style", "noscript", "svg", "img", "form", "iframe"]):
             tag.decompose()
 
+        # 2. Видаляємо навігацію, меню, шапки та підвали
         for selector in [
             "header", "footer", "nav", ".menu", ".navbar", ".sidebar",
             ".widget", ".breadcrumbs", ".search-form"
@@ -83,6 +58,7 @@ class SiteCrawlerService:
 
         title = soup.title.get_text(" ", strip=True) if soup.title else "Без назви"
 
+        # 3. Шукаємо блок з головним контентом
         main_candidates = [
             soup.find("main"),
             soup.find("article"),
@@ -93,8 +69,21 @@ class SiteCrawlerService:
 
         main_block = next((item for item in main_candidates if item), soup.body or soup)
 
-        text = " ".join(main_block.stripped_strings)
-        text = " ".join(text.split())
+        if main_block:
+            # 🔥 4. Зберігаємо посилання у форматі "Текст (URL)"
+            for a in main_block.find_all("a", href=True):
+                link_text = a.get_text(strip=True)
+                url = a["href"]
+                # Ігноруємо порожні тексти та внутрішні якорі сторінки
+                if link_text and not url.startswith("#"):
+                    full_url = urljoin(self.base_url, url) 
+                    a.string = f"{link_text} ({full_url})" 
+
+            # 5. Витягуємо чистий текст (вже з дописаними URL)
+            text = " ".join(main_block.stripped_strings)
+            text = " ".join(text.split())
+        else:
+            text = ""
 
         return title, text
 
@@ -112,40 +101,6 @@ class SiteCrawlerService:
 
         return list(dict.fromkeys(links))
 
-    def _extract_text(self, html: str) -> tuple[str, str]:
-        from bs4 import BeautifulSoup
-        soup = BeautifulSoup(html, "lxml")
-
-        for tag in soup(["script", "style", "noscript", "svg", "img", "form", "iframe"]):
-            tag.decompose()
-
-        for selector in [
-            "header", "footer", "nav", ".menu", ".navbar", ".sidebar",
-            ".widget", ".breadcrumbs", ".search-form"
-        ]:
-            for el in soup.select(selector):
-                el.decompose()
-
-        title = soup.title.get_text(" ", strip=True) if soup.title else "Без назви"
-
-        main_candidates = [
-            soup.find("main"),
-            soup.find("article"),
-            soup.find("div", class_="entry-content"),
-            soup.find("div", class_="post-content"),
-            soup.find("div", class_="content"),
-        ]
-
-        main_block = next((item for item in main_candidates if item), soup.body or soup)
-
-        if main_block:
-            text = " ".join(main_block.stripped_strings)
-            text = " ".join(text.split())
-        else:
-            text = ""
-
-        return title, text
-
     def crawl(self, start_urls: list[str]) -> list[dict]:
         visited = set()
         queue = deque(start_urls)
@@ -158,23 +113,6 @@ class SiteCrawlerService:
                 continue
             if not self._is_valid_url(current_url):
                 continue
-
-            if current_url.lower().endswith(".pdf"):
-                visited.add(current_url)
-                try:
-                    title, text = self._extract_pdf_text(current_url)
-                    if text and len(text) > 50:
-                        pages.append({
-                            "url": current_url,
-                            "title": title,
-                            "text": text
-                        })
-                except Exception as e:
-                    # ТЕПЕР МИ БАЧИМО ПОМИЛКУ PDF
-                    print(f"❌ Помилка PDF {current_url}: {e}")
-                    pass
-                continue
-
             try:
                 response = self.session.get(current_url, timeout=self.timeout)
                 response.raise_for_status()

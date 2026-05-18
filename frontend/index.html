@@ -9,6 +9,124 @@
 </head>
 
 <body class="dark">
+  <div id="intro-screen" class="intro-screen">
+    <svg class="microchip-svg" viewBox="0 0 1000 1000" xmlns="http://www.w3.org/2000/svg"
+      preserveAspectRatio="xMidYMid slice">
+      <defs>
+        <pattern id="core-pattern" x="0" y="0" width="22" height="22" patternUnits="userSpaceOnUse">
+          <path d="M 11 0 V 22 M 0 11 H 22" stroke="rgba(73, 223, 242, 0.15)" stroke-width="0.5" />
+          <path d="M 0 0 L 22 22 M 22 0 L 0 22" stroke="rgba(73, 223, 242, 0.08)" stroke-width="0.5" />
+          <rect x="4" y="4" width="14" height="14" fill="none" stroke="rgba(73, 223, 242, 0.25)" stroke-width="1" rx="2" />
+          <rect x="7" y="7" width="8" height="8" fill="rgba(73, 223, 242, 0.15)" rx="1" />
+          <circle cx="11" cy="4" r="1" fill="rgba(73, 223, 242, 0.8)" />
+          <circle cx="11" cy="18" r="1" fill="rgba(73, 223, 242, 0.8)" />
+          <circle cx="4" cy="11" r="1" fill="rgba(73, 223, 242, 0.8)" />
+          <circle cx="18" cy="11" r="1" fill="rgba(73, 223, 242, 0.8)" />
+          <circle cx="11" cy="11" r="2.5" fill="rgba(73, 223, 242, 0.7)" />
+        </pattern>
+      </defs>
+
+      <g class="tracks">
+        <path class="circuit-line" d="M 0 100 H 160 V 40 H 40 V 160 H 220 V 40 H 200 V 140 H 280 V 60 H 260 V 180 H 340 V 80 H 400 V 445 H 435" />
+        <path class="circuit-line" d="M 0 240 H 60 V 200 H 140 V 280 H 80 V 220 H 180 V 260 H 240 V 200 H 220 V 280 H 300 V 220 H 380 V 460 H 435" />
+        <path class="circuit-line" d="M 0 360 H 100 V 320 H 40 V 400 H 160 V 340 H 140 V 380 H 220 V 320 H 200 V 400 H 280 V 340 H 360 V 475 H 435" />
+        <path class="circuit-line" d="M 0 500 H 80 V 440 H 160 V 560 H 120 V 460 H 200 V 540 H 240 V 480 H 320 V 500 H 435" />
+        <path class="circuit-line" d="M 0 640 H 60 V 600 H 120 V 680 H 80 V 620 H 180 V 660 H 260 V 600 H 240 V 680 H 300 V 620 H 360 V 525 H 435" />
+        <path class="circuit-line" d="M 0 760 H 100 V 720 H 40 V 800 H 160 V 740 H 140 V 780 H 220 V 720 H 200 V 800 H 280 V 740 H 380 V 540 H 435" />
+        <path class="circuit-line" d="M 0 900 H 160 V 840 H 40 V 960 H 220 V 840 H 200 V 940 H 280 V 860 H 260 V 980 H 340 V 880 H 400 V 555 H 435" />
+        <path class="circuit-line" d="M 100 0 V 160 H 40 V 40 H 160 V 220 H 40 V 200 H 140 V 280 H 60 V 260 H 180 V 340 H 80 V 400 H 445 V 435" />
+        <path class="circuit-line" d="M 240 0 V 60 H 200 V 140 H 280 V 80 H 220 V 180 H 260 V 240 H 200 V 220 H 280 V 300 H 220 V 380 H 460 V 435" />
+        <path class="circuit-line" d="M 360 0 V 100 H 320 V 40 H 400 V 160 H 340 V 140 H 380 V 220 H 320 V 200 H 400 V 280 H 340 V 360 H 475 V 435" />
+        <path class="circuit-line" d="M 500 0 V 80 H 440 V 160 H 560 V 120 H 460 V 200 H 540 V 240 H 480 V 320 H 500 V 435" />
+        <path class="circuit-line" d="M 640 0 V 60 H 600 V 120 H 680 V 80 H 620 V 180 H 660 V 260 H 600 V 240 H 680 V 300 H 620 V 360 H 525 V 435" />
+        <path class="circuit-line" d="M 760 0 V 100 H 720 V 40 H 800 V 160 H 740 V 140 H 780 V 220 H 720 V 200 H 800 V 280 H 740 V 380 H 540 V 435" />
+        <path class="circuit-line" d="M 900 0 V 160 H 840 V 40 H 960 V 220 H 840 V 200 H 940 V 280 H 860 V 260 H 980 V 340 H 880 V 400 H 555 V 435" />
+        <path class="circuit-line" d="M 1000 100 H 840 V 40 H 960 V 160 H 780 V 40 H 800 V 140 H 720 V 60 H 740 V 180 H 660 V 80 H 600 V 445 H 565" />
+        <path class="circuit-line" d="M 1000 240 H 940 V 200 H 860 V 280 H 920 V 220 H 820 V 260 H 760 V 200 H 780 V 280 H 700 V 220 H 620 V 460 H 565" />
+        <path class="circuit-line" d="M 1000 360 H 900 V 320 H 960 V 400 H 840 V 340 H 860 V 380 H 780 V 320 H 800 V 400 H 720 V 340 H 640 V 475 H 565" />
+        <path class="circuit-line" d="M 1000 500 H 920 V 440 H 840 V 560 H 880 V 460 H 800 V 540 H 760 V 480 H 680 V 500 H 565" />
+        <path class="circuit-line" d="M 1000 640 H 940 V 600 H 880 V 680 H 920 V 620 H 820 V 660 H 740 V 600 H 760 V 680 H 700 V 620 H 640 V 525 H 565" />
+        <path class="circuit-line" d="M 1000 760 H 900 V 720 H 960 V 800 H 840 V 740 H 860 V 780 H 780 V 720 H 800 V 800 H 720 V 740 H 620 V 540 H 565" />
+        <path class="circuit-line" d="M 1000 900 H 840 V 840 H 960 V 960 H 780 V 840 H 800 V 940 H 720 V 860 H 740 V 980 H 660 V 880 H 600 V 555 H 565" />
+        <path class="circuit-line" d="M 100 1000 V 840 H 40 V 960 H 160 V 780 H 40 V 800 H 140 V 720 H 60 V 740 H 180 V 660 H 80 V 600 H 445 V 565" />
+        <path class="circuit-line" d="M 240 1000 V 940 H 200 V 860 H 280 V 920 H 220 V 820 H 260 V 760 H 200 V 780 H 280 V 700 H 220 V 620 H 460 V 565" />
+        <path class="circuit-line" d="M 360 1000 V 900 H 320 V 960 H 400 V 840 H 340 V 860 H 380 V 780 H 320 V 800 H 400 V 720 H 340 V 640 H 475 V 565" />
+        <path class="circuit-line" d="M 500 1000 V 920 H 440 V 840 H 560 V 880 H 460 V 800 H 540 V 760 H 480 V 680 H 500 V 565" />
+        <path class="circuit-line" d="M 640 1000 V 940 H 600 V 880 H 680 V 920 H 620 V 820 H 660 V 740 H 600 V 760 H 680 V 700 H 620 V 640 H 525 V 565" />
+        <path class="circuit-line" d="M 760 1000 V 900 H 720 V 960 H 800 V 840 H 740 V 860 H 780 V 780 H 720 V 800 H 800 V 720 H 740 V 620 H 540 V 565" />
+        <path class="circuit-line" d="M 900 1000 V 840 H 840 V 960 H 960 V 780 H 840 V 800 H 940 V 720 H 860 V 740 H 980 V 660 H 880 V 600 H 555 V 565" />
+</g>
+
+      <g class="nodes">
+        <circle cx="435" cy="450" r="5" class="circuit-node" />
+        <circle cx="435" cy="475" r="5" class="circuit-node" />
+        <circle cx="435" cy="500" r="5" class="circuit-node" />
+        <circle cx="435" cy="525" r="5" class="circuit-node" />
+        <circle cx="435" cy="550" r="5" class="circuit-node" />
+
+        <circle cx="565" cy="450" r="5" class="circuit-node" />
+        <circle cx="565" cy="475" r="5" class="circuit-node" />
+        <circle cx="565" cy="500" r="5" class="circuit-node" />
+        <circle cx="565" cy="525" r="5" class="circuit-node" />
+        <circle cx="565" cy="550" r="5" class="circuit-node" />
+
+        <circle cx="450" cy="435" r="5" class="circuit-node" />
+        <circle cx="475" cy="435" r="5" class="circuit-node" />
+        <circle cx="500" cy="435" r="5" class="circuit-node" />
+        <circle cx="525" cy="435" r="5" class="circuit-node" />
+        <circle cx="550" cy="435" r="5" class="circuit-node" />
+
+        <circle cx="450" cy="565" r="5" class="circuit-node" />
+        <circle cx="475" cy="565" r="5" class="circuit-node" />
+        <circle cx="500" cy="565" r="5" class="circuit-node" />
+        <circle cx="525" cy="565" r="5" class="circuit-node" />
+        <circle cx="550" cy="565" r="5" class="circuit-node" />
+
+        <circle cx="250" cy="250" r="4.5" class="circuit-node" />
+        <circle cx="750" cy="750" r="4.5" class="circuit-node" />
+        <circle cx="250" cy="750" r="4.5" class="circuit-node" />
+        <circle cx="750" cy="250" r="4.5" class="circuit-node" />
+      </g>
+
+      <g class="pulses" style="display: none;">
+        <path class="signal-pulse" d="M 0 100 H 160 V 40 H 40 V 160 H 220 V 40 H 200 V 140 H 280 V 60 H 260 V 180 H 340 V 80 H 400 V 445 H 435" />
+        <path class="signal-pulse" d="M 0 240 H 60 V 200 H 140 V 280 H 80 V 220 H 180 V 260 H 240 V 200 H 220 V 280 H 300 V 220 H 380 V 460 H 435" />
+        <path class="signal-pulse" d="M 0 360 H 100 V 320 H 40 V 400 H 160 V 340 H 140 V 380 H 220 V 320 H 200 V 400 H 280 V 340 H 360 V 475 H 435" />
+        <path class="signal-pulse" d="M 0 500 H 80 V 440 H 160 V 560 H 120 V 460 H 200 V 540 H 240 V 480 H 320 V 500 H 435" />
+        <path class="signal-pulse" d="M 0 640 H 60 V 600 H 120 V 680 H 80 V 620 H 180 V 660 H 260 V 600 H 240 V 680 H 300 V 620 H 360 V 525 H 435" />
+        <path class="signal-pulse" d="M 0 760 H 100 V 720 H 40 V 800 H 160 V 740 H 140 V 780 H 220 V 720 H 200 V 800 H 280 V 740 H 380 V 540 H 435" />
+        <path class="signal-pulse" d="M 0 900 H 160 V 840 H 40 V 960 H 220 V 840 H 200 V 940 H 280 V 860 H 260 V 980 H 340 V 880 H 400 V 555 H 435" />
+        <path class="signal-pulse" d="M 100 0 V 160 H 40 V 40 H 160 V 220 H 40 V 200 H 140 V 280 H 60 V 260 H 180 V 340 H 80 V 400 H 445 V 435" />
+        <path class="signal-pulse" d="M 240 0 V 60 H 200 V 140 H 280 V 80 H 220 V 180 H 260 V 240 H 200 V 220 H 280 V 300 H 220 V 380 H 460 V 435" />
+        <path class="signal-pulse" d="M 360 0 V 100 H 320 V 40 H 400 V 160 H 340 V 140 H 380 V 220 H 320 V 200 H 400 V 280 H 340 V 360 H 475 V 435" />
+        <path class="signal-pulse" d="M 500 0 V 80 H 440 V 160 H 560 V 120 H 460 V 200 H 540 V 240 H 480 V 320 H 500 V 435" />
+        <path class="signal-pulse" d="M 640 0 V 60 H 600 V 120 H 680 V 80 H 620 V 180 H 660 V 260 H 600 V 240 H 680 V 300 H 620 V 360 H 525 V 435" />
+        <path class="signal-pulse" d="M 760 0 V 100 H 720 V 40 H 800 V 160 H 740 V 140 H 780 V 220 H 720 V 200 H 800 V 280 H 740 V 380 H 540 V 435" />
+        <path class="signal-pulse" d="M 900 0 V 160 H 840 V 40 H 960 V 220 H 840 V 200 H 940 V 280 H 860 V 260 H 980 V 340 H 880 V 400 H 555 V 435" />
+        <path class="signal-pulse" d="M 1000 100 H 840 V 40 H 960 V 160 H 780 V 40 H 800 V 140 H 720 V 60 H 740 V 180 H 660 V 80 H 600 V 445 H 565" />
+        <path class="signal-pulse" d="M 1000 240 H 940 V 200 H 860 V 280 H 920 V 220 H 820 V 260 H 760 V 200 H 780 V 280 H 700 V 220 H 620 V 460 H 565" />
+        <path class="signal-pulse" d="M 1000 360 H 900 V 320 H 960 V 400 H 840 V 340 H 860 V 380 H 780 V 320 H 800 V 400 H 720 V 340 H 640 V 475 H 565" />
+        <path class="signal-pulse" d="M 1000 500 H 920 V 440 H 840 V 560 H 880 V 460 H 800 V 540 H 760 V 480 H 680 V 500 H 565" />
+        <path class="signal-pulse" d="M 1000 640 H 940 V 600 H 880 V 680 H 920 V 620 H 820 V 660 H 740 V 600 H 760 V 680 H 700 V 620 H 640 V 525 H 565" />
+        <path class="signal-pulse" d="M 1000 760 H 900 V 720 H 960 V 800 H 840 V 740 H 860 V 780 H 780 V 720 H 800 V 800 H 720 V 740 H 620 V 540 H 565" />
+        <path class="signal-pulse" d="M 1000 900 H 840 V 840 H 960 V 960 H 780 V 840 H 800 V 940 H 720 V 860 H 740 V 980 H 660 V 880 H 600 V 555 H 565" />
+        <path class="signal-pulse" d="M 100 1000 V 840 H 40 V 960 H 160 V 780 H 40 V 800 H 140 V 720 H 60 V 740 H 180 V 660 H 80 V 600 H 445 V 565" />
+        <path class="signal-pulse" d="M 240 1000 V 940 H 200 V 860 H 280 V 920 H 220 V 820 H 260 V 760 H 200 V 780 H 280 V 700 H 220 V 620 H 460 V 565" />
+        <path class="signal-pulse" d="M 360 1000 V 900 H 320 V 960 H 400 V 840 H 340 V 860 H 380 V 780 H 320 V 800 H 400 V 720 H 340 V 640 H 475 V 565" />
+        <path class="signal-pulse" d="M 500 1000 V 920 H 440 V 840 H 560 V 880 H 460 V 800 H 540 V 760 H 480 V 680 H 500 V 565" />
+        <path class="signal-pulse" d="M 640 1000 V 940 H 600 V 880 H 680 V 920 H 620 V 820 H 660 V 740 H 600 V 760 H 680 V 700 H 620 V 640 H 525 V 565" />
+        <path class="signal-pulse" d="M 760 1000 V 900 H 720 V 960 H 800 V 840 H 740 V 860 H 780 V 780 H 720 V 800 H 800 V 720 H 740 V 620 H 540 V 565" />
+        <path class="signal-pulse" d="M 900 1000 V 840 H 840 V 960 H 960 V 780 H 840 V 800 H 940 V 720 H 860 V 740 H 980 V 660 H 880 V 600 H 555 V 565" />
+</g>
+
+      <rect class="chip-center" x="435" y="435" width="130" height="130" rx="8" />
+      <rect class="chip-inner" x="445" y="445" width="110" height="110" rx="4" />
+      <rect class="chip-pattern" x="445" y="445" width="110" height="110" rx="4" fill="url(#core-pattern)" />
+
+      <text class="chip-text" x="500" y="500" text-anchor="middle" dominant-baseline="central">FRECS</text>
+    </svg>
+    <p class="start-text">Натисніть на екран, щоб розпочати</p>
+  </div>
   <svg id="stars"></svg>
 
   <div class="comet" style="top:-20%; left:-30%; animation-delay:0s;"></div>

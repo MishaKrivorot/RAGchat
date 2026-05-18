@@ -34,7 +34,19 @@ function drawStars() {
 
 /* ---------------- ТЕМА ---------------- */
 function applyThemeIcon() {
-  themeIcon.textContent = document.body.classList.contains("dark") ? "🌙" : "☀️";
+  const isDark = document.body.classList.contains("dark");
+  themeIcon.textContent = isDark ? "🌙" : "☀️";
+
+  // Змінюємо картинки залежно від теми
+  const ship1 = document.getElementById("ship1");
+  const ship2 = document.getElementById("ship2");
+
+  if (ship1) {
+    ship1.src = isDark ? "nlo_invert.png" : "nlo.png";
+  }
+  if (ship2) {
+    ship2.src = isDark ? "rocket_invert.png" : "rocket.png";
+  }
 }
 
 themeIcon.addEventListener("click", () => {
@@ -48,7 +60,7 @@ themeIcon.addEventListener("click", () => {
 function spawnComet() {
   const comet = document.createElement("div");
   comet.className = "comet";
-  comet.style.left = (-20 - Math.random() * 30) + "%";
+  comet.style.left = (-20 + Math.random() * 120) + "%";
   comet.style.top = (-20 - Math.random() * 40) + "%";
   comet.style.animationDuration = (4 + Math.random() * 4) + "s";
   comet.style.animationDelay = (Math.random() * 2) + "s";
@@ -58,17 +70,20 @@ function spawnComet() {
 }
 
 /* ---------------- КОРАБЛІ ---------------- */
-function cycleShips() {
-  ships.forEach(s => {
-    s.style.display = "none";
+function initShips() {
+  ships.forEach((ship, index) => {
+    if (!ship) return;
+    ship.style.display = "block";
+    ship.style.top = (10 + Math.random() * 70) + "%";
+    ship.style.animationDuration = (18 + Math.random() * 25) + "s";
+    ship.style.animationDelay = (index * 12) + "s";
+    
+    // Оновлюємо позицію та швидкість кожного разу, коли корабель завершує проліт
+    ship.addEventListener("animationiteration", () => {
+      ship.style.top = (10 + Math.random() * 70) + "%";
+      ship.style.animationDuration = (18 + Math.random() * 25) + "s";
+    });
   });
-
-  const ship = ships[currentShip];
-  ship.style.display = "block";
-  ship.style.top = (10 + Math.random() * 70) + "%";
-  ship.style.animationDuration = (18 + Math.random() * 25) + "s";
-
-  currentShip = (currentShip + 1) % ships.length;
 }
 
 /* ---------------- ДОПОМІЖНІ ---------------- */
@@ -111,15 +126,31 @@ function buildSourcesHtml(sources) {
   let html = `<div class="sources"><div class="sources-title">Знайдені джерела</div>`;
 
   sources.forEach((source, index) => {
-    // Використовуємо теги <details> та <summary> для створення розгортки
+    // Безпечне отримання значень
+    const qText = escapeHtml(source.question || "Загальна інформація");
+    const aText = escapeHtml(source.answer || "Відповіді немає");
+    const scoreVal = Number(source.score || 0).toFixed(3);
+    const likesVal = source.likes || 0;
+    const sId = source.id || "";
+    const sType = source.source_type || "";
+
     html += `
       <details class="source-card">
-        <summary class="source-summary">
-          <span class="source-label">${index + 1}. Питання:</span> ${escapeHtml(source.question || "Деталі")}
+        <summary style="display: flex; justify-content: space-between; align-items: center; list-style: none;">
+            <div style="flex-grow: 1; padding-right: 10px;">
+              <span class="source-label">${index + 1}. Питання:</span> ${qText}
+            </div>
+            <div style="display:flex; gap: 5px;">
+              <button class="like-btn" onclick="event.preventDefault(); sendFeedback('${sId}', '${sType}', 'like', this)" title="Корисне">👍 <span style="font-size:11px">${likesVal}</span></button>
+              <button class="like-btn" onclick="event.preventDefault(); sendFeedback('${sId}', '${sType}', 'dislike', this)" title="Не корисне">👎 <span style="font-size:11px">${source.dislikes || 0}</span></button>
+            </div>
         </summary>
-        <div class="source-content" style="margin-top: 10px; padding-top: 10px; border-top: 1px solid rgba(127, 127, 127, 0.2);">
-          <div style="margin-bottom:6px;"><span class="source-label">Відповідь:</span> ${escapeHtml(source.answer || "")}</div>
-          <div><span class="source-label">Score:</span> ${Number(source.score || 0).toFixed(3)}</div>
+        <div style="margin-top: 10px; padding-top: 10px; border-top: 1px solid rgba(127, 127, 127, 0.2);">
+            <div><span class="source-label">Відповідь:</span> ${aText}</div>
+            <div style="margin-top:6px;">
+                <span class="source-label">Score:</span> ${scoreVal} 
+                <span style="opacity: 0.6; font-size: 11px;">(Лайків: ${likesVal})</span>
+            </div>
         </div>
       </details>
     `;
@@ -272,8 +303,7 @@ qInput.addEventListener("keydown", (event) => {
 drawStars();
 applyThemeIcon();
 setInterval(spawnComet, 2500);
-setInterval(cycleShips, 12000);
-cycleShips();
+initShips();
 checkApi();
 
 addMessage(
@@ -281,3 +311,80 @@ addMessage(
   "bot",
   { mode: "greeting", confidence: 1.0 }
 );
+
+
+
+/* ---------------- ФІДБЕК ---------------- */
+window.sendFeedback = async function (pointId, sourceType, action, btnElement) {
+  if (btnElement.classList.contains("acted")) return; // Захист від повтору
+
+  const container = btnElement.parentElement;
+  Array.from(container.children).forEach(btn => btn.classList.add("acted")); // Блокуємо обидві кнопки
+
+  btnElement.style.background = action === 'like' ? 'rgba(74, 222, 128, 0.3)' : 'rgba(248, 113, 113, 0.3)';
+
+  try {
+    const response = await fetch("http://127.0.0.1:8000/api/chat/feedback", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ id: pointId, source_type: sourceType, action: action })
+    });
+
+    const data = await response.json();
+
+    // 🔥 Миттєво оновлюємо цифру на кнопці
+    if (data.status === "success") {
+      const span = btnElement.querySelector("span");
+      if (span) {
+        span.innerText = action === 'like' ? data.likes : data.dislikes;
+      }
+    }
+  } catch (error) {
+    console.error("Помилка відправки:", error);
+  }
+};
+
+/* ---------------- INTRO SCREEN (МІКРОСХЕМА) ---------------- */
+const introScreen = document.getElementById("intro-screen");
+
+if (introScreen) {
+  introScreen.addEventListener("click", () => {
+    // Плавно приховуємо екран
+    introScreen.classList.add("hidden");
+
+    // Повністю видаляємо його з DOM через 600мс (після завершення анімації зникнення),
+    // щоб він не заважав клікати на елементи чату
+    setTimeout(() => {
+      introScreen.remove();
+      // Можна додати автофокус на поле вводу, щоб користувач одразу міг писати
+      qInput.focus();
+    }, 600);
+  });
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  // Вступна анімація мікросхеми (drawSignal, powerUp) триває приблизно 5с.
+  // Вмикаємо логіку імпульсів через 5.2с.
+  setTimeout(() => {
+    const pulseGroup = document.querySelector('.microchip-svg .pulses');
+    if (pulseGroup) {
+      // Вмикаємо видимість усієї групи
+      pulseGroup.style.display = 'block';
+
+      const pulsePaths = pulseGroup.querySelectorAll('.signal-pulse');
+
+      pulsePaths.forEach(pulse => {
+        // 🔥 Нові налаштування:
+        // Тривалість циклу: 15с (дуже довго, для рідкої появи)
+        const duration = 15;
+
+        // Хаотична початкова затримка: від 0 до 12с.
+        // Це розподіляє появу імпульсів у часі, щоб вони не clump up.
+        const randomDelay = (Math.random() * 12).toFixed(2);
+
+        // Застосовуємо анімацію runPulse
+        pulse.style.animation = `runPulse ${duration}s ${randomDelay}s infinite linear`;
+      });
+    }
+  }, 5200); // Починаємо логіку після завершення вступу
+});

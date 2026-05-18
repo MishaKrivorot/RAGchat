@@ -115,12 +115,13 @@ body.light .comet {
   }
 
   100% {
-    transform: translate(100vw, 130vh) rotate(135deg);
+    transform: translate(150vw, 150vh) rotate(135deg);
   }
 }
 
 .ship {
   position: fixed;
+  left: 0;
   width: 84px;
   opacity: 0.9;
   z-index: -1;
@@ -505,6 +506,304 @@ details.source-card summary:hover {
 details.source-card[open] summary {
   margin-bottom: 5px;
   color: var(--accent);
+}
+
+/* Кнопка лайку */
+.like-btn {
+  background: transparent;
+  border: 1px solid rgba(127, 127, 127, 0.3);
+  border-radius: 6px;
+  cursor: pointer;
+  padding: 4px 8px;
+  font-size: 14px;
+  transition: all 0.2s;
+  margin-left: 10px;
+}
+
+.like-btn:hover {
+  background: rgba(74, 222, 128, 0.2);
+  /* Легкий зелений фон при наведенні */
+  border-color: rgba(74, 222, 128, 0.6);
+}
+
+.like-btn.liked {
+  background: rgba(74, 222, 128, 0.3);
+  border-color: rgba(74, 222, 128, 0.8);
+  cursor: default;
+  pointer-events: none;
+}
+
+/* Стилі для посилань у повідомленнях */
+.msg-text a {
+  color: #2563eb;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.msg-text a:visited {
+  color: #9333ea;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.msg-text a:hover {
+  text-decoration: underline;
+}
+
+/* Яскраві кольори для темної теми */
+body.dark .msg-text a {
+  color: #38bdf8;
+  /* Світло-блакитний (добре читається на чорному) */
+}
+
+body.dark .msg-text a:visited {
+  color: #c084fc;
+  /* Світло-фіолетовий (замість темного стандартного) */
+}
+
+/* ========================================= */
+/* АНІМАЦІЯ МІКРОСХЕМИ (INTRO SCREEN)        */
+/* ========================================= */
+
+.intro-screen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: var(--bg-dark);
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: opacity 0.6s ease, visibility 0.6s ease;
+}
+
+.intro-screen.hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.microchip-svg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+.circuit-line {
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 3;
+  stroke-linecap: square;
+  /* 🔥 ЗМІНА: bevel ідеально підходить для 45-градусних PCB-зрізів */
+  stroke-linejoin: bevel;
+
+  stroke-dasharray: 3000;
+  stroke-dashoffset: 3000;
+  animation: drawSignal 4s ease-in-out forwards;
+}
+
+.chip-center {
+  fill: var(--bg-dark);
+  stroke: var(--accent);
+  stroke-width: 3;
+  /* Трохи тонше для подвійного контуру */
+  opacity: 0;
+  animation:
+    powerUp 0.8s 4.0s forwards,
+    pulseGlow 2s 4.8s infinite alternate ease-in-out;
+}
+
+/* 🔥 ДОДАНО: Внутрішнє ядро процесора */
+.chip-inner {
+  fill: rgba(73, 223, 242, 0.05);
+  /* Легка заливка */
+  stroke: var(--accent);
+  stroke-width: 1.5;
+  opacity: 0;
+  animation: powerUp 0.8s 4.2s forwards;
+  /* Вмикається на мить пізніше */
+}
+
+.chip-pattern {
+  opacity: 0;
+  animation: powerUp 0.8s 4.4s forwards, pulseGlow 3s 5.2s infinite alternate ease-in-out;
+  pointer-events: none;
+}
+
+/* 🔥 ДОДАНО: Контактні кільця на кінцях доріжок */
+.circuit-node {
+  fill: var(--bg-dark);
+  stroke: var(--accent);
+  stroke-width: 2.5;
+  opacity: 0;
+  /* Запалюються разом із процесором */
+  animation:
+    powerUp 0.8s 4.0s forwards,
+    pulseGlow 2s 4.8s infinite alternate ease-in-out;
+}
+
+/* 🔥 ДОДАНО: Стилі для біжучих імпульсів (даних) */
+.signal-pulse {
+  fill: none;
+  stroke: #ffffff;
+  /* Яскраво-білий колір імпульсу */
+  stroke-width: 4;
+  /* Трохи товстіший за лінію */
+  stroke-linecap: round;
+  stroke-linejoin: miter;
+
+  /* 15px - довжина імпульсу, 2000px - величезна порожнеча за ним */
+  stroke-dasharray: 15 2000;
+  stroke-dashoffset: 0;
+  opacity: 0;
+  /* Невидимий до початку анімації */
+  filter: drop-shadow(0 0 6px rgba(255, 255, 255, 0.9));
+  /* Світіння */
+}
+
+.chip-text {
+  font-family: Arial, sans-serif;
+  font-size: 24px;
+  font-weight: bold;
+  fill: var(--accent);
+  /* Колір під колір ліній */
+  letter-spacing: 3px;
+  opacity: 0;
+  pointer-events: none;
+  /* Щоб клік проходив крізь текст на сам екран */
+  /* З'являється синхронно з увімкненням процесора на 4-й секунді */
+  animation: fadeInChipText 0.8s 4.0s forwards;
+}
+
+.start-text {
+  position: absolute;
+  bottom: 8vh;
+  z-index: 2;
+  font-size: 16px;
+  color: #fff;
+  opacity: 0;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  font-weight: bold;
+  text-shadow: 0 0 8px var(--accent);
+  text-align: center;
+  padding: 0 20px;
+  /* 🔥 ЗМІНА: Текст з'являється після ввімкнення процесора (4.5с) */
+  animation: fadeInText 1s 4.5s forwards, blinkText 2.5s 5.5s infinite;
+}
+
+/* Окремі налаштування для телефонів */
+@media (max-width: 768px) {
+  .start-text {
+    font-size: 12px;
+    letter-spacing: 2px;
+    /* На мобільних опускаємо ще нижче */
+    bottom: 5vh;
+  }
+
+  .circuit-line {
+    /* Товстіші лінії краще виглядають на маленьких екранах */
+    stroke-width: 4;
+  }
+}
+
+/* --- КЛЮЧОВІ КАДРИ (KEYFRAMES) --- */
+@keyframes drawSignal {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes runPulse {
+  0% {
+    stroke-dashoffset: 0;
+    opacity: 0;
+  }
+
+  1% {
+    opacity: 1;
+    /* Швидко з'являється */
+  }
+
+  20% {
+    opacity: 1;
+    /* Тримається видимим */
+  }
+
+  /* Активна фаза руху закінчується на 30% часу */
+  30% {
+    stroke-dashoffset: -2000;
+    /* 🔥 Збільшено travel distance */
+    opacity: 0;
+    /* Плавно розчиняється */
+  }
+
+  /* Решта 70% часу — тиша (імпульс прихований) */
+  100% {
+    stroke-dashoffset: -2000;
+    opacity: 0;
+  }
+}
+
+@keyframes powerUp {
+  from {
+    opacity: 0;
+    fill: var(--bg-dark);
+    filter: drop-shadow(0 0 0px var(--accent));
+  }
+
+  to {
+    opacity: 1;
+    fill: rgba(73, 223, 242, 0.15);
+    filter: drop-shadow(0 0 15px var(--accent));
+  }
+}
+
+@keyframes pulseGlow {
+  from {
+    filter: drop-shadow(0 0 15px var(--accent));
+  }
+
+  to {
+    filter: drop-shadow(0 0 35px var(--accent));
+  }
+}
+
+@keyframes fadeInText {
+  to {
+    opacity: 0.8;
+  }
+}
+
+@keyframes blinkText {
+
+  0%,
+  100% {
+    opacity: 0.8;
+  }
+
+  50% {
+    opacity: 0.3;
+  }
+}
+
+@keyframes fadeInChipText {
+  from {
+    opacity: 0;
+    filter: drop-shadow(0 0 0px var(--accent));
+  }
+
+  to {
+    opacity: 1;
+    filter: drop-shadow(0 0 8px var(--accent));
+  }
 }
 
 @media (max-width: 768px) {
