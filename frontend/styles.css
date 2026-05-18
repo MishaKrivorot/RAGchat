@@ -837,3 +837,5 @@ body.dark .msg-text a:visited {
     width: 100%;
   }
 }
+/* Pause animations in background */
+body.paused-animation * { animation-play-state: paused !important; }

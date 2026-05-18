@@ -1,5 +1,5 @@
-const API_URL = "http://127.0.0.1:8000/api/chat/";
-const HEALTH_URL = "http://127.0.0.1:8000/";
+const API_URL = "https://frecs-chat.up.railway.app/api/chat/";
+const HEALTH_URL = "https://frecs-chat.up.railway.app/";
 
 const svg = document.getElementById("stars");
 const themeIcon = document.getElementById("themeIcon");
@@ -77,7 +77,7 @@ function initShips() {
     ship.style.top = (10 + Math.random() * 70) + "%";
     ship.style.animationDuration = (18 + Math.random() * 25) + "s";
     ship.style.animationDelay = (index * 12) + "s";
-    
+
     // Оновлюємо позицію та швидкість кожного разу, коли корабель завершує проліт
     ship.addEventListener("animationiteration", () => {
       ship.style.top = (10 + Math.random() * 70) + "%";
@@ -302,9 +302,20 @@ qInput.addEventListener("keydown", (event) => {
 /* ---------------- INIT ---------------- */
 drawStars();
 applyThemeIcon();
-setInterval(spawnComet, 2500);
+
+let cometInterval = setInterval(spawnComet, 2500);
 initShips();
 checkApi();
+
+document.addEventListener("visibilitychange", () => {
+  if (document.hidden) {
+    clearInterval(cometInterval);
+    document.body.classList.add("paused-animation");
+  } else {
+    cometInterval = setInterval(spawnComet, 2500);
+    document.body.classList.remove("paused-animation");
+  }
+});
 
 addMessage(
   "Вітаю! Я чат-бот університету. Постав запитання щодо вступу, навчання, розкладу або документів.",
@@ -324,7 +335,7 @@ window.sendFeedback = async function (pointId, sourceType, action, btnElement) {
   btnElement.style.background = action === 'like' ? 'rgba(74, 222, 128, 0.3)' : 'rgba(248, 113, 113, 0.3)';
 
   try {
-    const response = await fetch("http://127.0.0.1:8000/api/chat/feedback", {
+    const response = await fetch("https://frecs-chat.up.railway.app/api/chat/feedback", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ id: pointId, source_type: sourceType, action: action })

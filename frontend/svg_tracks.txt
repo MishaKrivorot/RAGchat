@@ -1,0 +1,64 @@
+<g class="tracks">
+        <path class="circuit-line" d="M 0 100 H 100 V 476 H 96 V 126 H 384 V 874 H 156 V 226 H 324 V 774 H 216 V 476 H 435" />
+        <path class="circuit-line" d="M 0 233 H 80 V 484 H 104 V 134 H 376 V 866 H 164 V 234 H 316 V 766 H 224 V 484 H 435" />
+        <path class="circuit-line" d="M 0 366 H 60 V 492 H 112 V 142 H 368 V 858 H 172 V 242 H 308 V 758 H 232 V 492 H 435" />
+        <path class="circuit-line" d="M 0 500 H 40 H 120 V 150 H 360 V 850 H 180 V 250 H 300 V 750 H 240 V 500 H 435" />
+        <path class="circuit-line" d="M 0 633 H 60 V 508 H 128 V 158 H 352 V 842 H 188 V 258 H 292 V 742 H 248 V 508 H 435" />
+        <path class="circuit-line" d="M 0 766 H 80 V 516 H 136 V 166 H 344 V 834 H 196 V 266 H 284 V 734 H 256 V 516 H 435" />
+        <path class="circuit-line" d="M 0 900 H 100 V 524 H 144 V 174 H 336 V 826 H 204 V 274 H 276 V 726 H 264 V 524 H 435" />
+        <path class="circuit-line" d="M 100 0 V 100 H 476 V 96 H 126 V 384 H 874 V 156 H 226 V 324 H 774 V 216 H 476 V 435" />
+        <path class="circuit-line" d="M 233 0 V 80 H 484 V 104 H 134 V 376 H 866 V 164 H 234 V 316 H 766 V 224 H 484 V 435" />
+        <path class="circuit-line" d="M 366 0 V 60 H 492 V 112 H 142 V 368 H 858 V 172 H 242 V 308 H 758 V 232 H 492 V 435" />
+        <path class="circuit-line" d="M 500 0 V 40 V 120 H 150 V 360 H 850 V 180 H 250 V 300 H 750 V 240 H 500 V 435" />
+        <path class="circuit-line" d="M 633 0 V 60 H 508 V 128 H 158 V 352 H 842 V 188 H 258 V 292 H 742 V 248 H 508 V 435" />
+        <path class="circuit-line" d="M 766 0 V 80 H 516 V 136 H 166 V 344 H 834 V 196 H 266 V 284 H 734 V 256 H 516 V 435" />
+        <path class="circuit-line" d="M 900 0 V 100 H 524 V 144 H 174 V 336 H 826 V 204 H 274 V 276 H 726 V 264 H 524 V 435" />
+        <path class="circuit-line" d="M 1000 100 H 900 V 476 H 904 V 126 H 616 V 874 H 844 V 226 H 676 V 774 H 784 V 476 H 565" />
+        <path class="circuit-line" d="M 1000 233 H 920 V 484 H 896 V 134 H 624 V 866 H 836 V 234 H 684 V 766 H 776 V 484 H 565" />
+        <path class="circuit-line" d="M 1000 366 H 940 V 492 H 888 V 142 H 632 V 858 H 828 V 242 H 692 V 758 H 768 V 492 H 565" />
+        <path class="circuit-line" d="M 1000 500 H 960 H 880 V 150 H 640 V 850 H 820 V 250 H 700 V 750 H 760 V 500 H 565" />
+        <path class="circuit-line" d="M 1000 633 H 940 V 508 H 872 V 158 H 648 V 842 H 812 V 258 H 708 V 742 H 752 V 508 H 565" />
+        <path class="circuit-line" d="M 1000 766 H 920 V 516 H 864 V 166 H 656 V 834 H 804 V 266 H 716 V 734 H 744 V 516 H 565" />
+        <path class="circuit-line" d="M 1000 900 H 900 V 524 H 856 V 174 H 664 V 826 H 796 V 274 H 724 V 726 H 736 V 524 H 565" />
+        <path class="circuit-line" d="M 100 1000 V 900 H 476 V 904 H 126 V 616 H 874 V 844 H 226 V 676 H 774 V 784 H 476 V 565" />
+        <path class="circuit-line" d="M 233 1000 V 920 H 484 V 896 H 134 V 624 H 866 V 836 H 234 V 684 H 766 V 776 H 484 V 565" />
+        <path class="circuit-line" d="M 366 1000 V 940 H 492 V 888 H 142 V 632 H 858 V 828 H 242 V 692 H 758 V 768 H 492 V 565" />
+        <path class="circuit-line" d="M 500 1000 V 960 V 880 H 150 V 640 H 850 V 820 H 250 V 700 H 750 V 760 H 500 V 565" />
+        <path class="circuit-line" d="M 633 1000 V 940 H 508 V 872 H 158 V 648 H 842 V 812 H 258 V 708 H 742 V 752 H 508 V 565" />
+        <path class="circuit-line" d="M 766 1000 V 920 H 516 V 864 H 166 V 656 H 834 V 804 H 266 V 716 H 734 V 744 H 516 V 565" />
+        <path class="circuit-line" d="M 900 1000 V 900 H 524 V 856 H 174 V 664 H 826 V 796 H 274 V 724 H 726 V 736 H 524 V 565" />
+      </g>
+
+      <g class="nodes">
+</g>
+
+<g class="pulses" style="display: none;">
+        <path class="signal-pulse" d="M 0 100 H 100 V 476 H 96 V 126 H 384 V 874 H 156 V 226 H 324 V 774 H 216 V 476 H 435" />
+        <path class="signal-pulse" d="M 0 233 H 80 V 484 H 104 V 134 H 376 V 866 H 164 V 234 H 316 V 766 H 224 V 484 H 435" />
+        <path class="signal-pulse" d="M 0 366 H 60 V 492 H 112 V 142 H 368 V 858 H 172 V 242 H 308 V 758 H 232 V 492 H 435" />
+        <path class="signal-pulse" d="M 0 500 H 40 H 120 V 150 H 360 V 850 H 180 V 250 H 300 V 750 H 240 V 500 H 435" />
+        <path class="signal-pulse" d="M 0 633 H 60 V 508 H 128 V 158 H 352 V 842 H 188 V 258 H 292 V 742 H 248 V 508 H 435" />
+        <path class="signal-pulse" d="M 0 766 H 80 V 516 H 136 V 166 H 344 V 834 H 196 V 266 H 284 V 734 H 256 V 516 H 435" />
+        <path class="signal-pulse" d="M 0 900 H 100 V 524 H 144 V 174 H 336 V 826 H 204 V 274 H 276 V 726 H 264 V 524 H 435" />
+        <path class="signal-pulse" d="M 100 0 V 100 H 476 V 96 H 126 V 384 H 874 V 156 H 226 V 324 H 774 V 216 H 476 V 435" />
+        <path class="signal-pulse" d="M 233 0 V 80 H 484 V 104 H 134 V 376 H 866 V 164 H 234 V 316 H 766 V 224 H 484 V 435" />
+        <path class="signal-pulse" d="M 366 0 V 60 H 492 V 112 H 142 V 368 H 858 V 172 H 242 V 308 H 758 V 232 H 492 V 435" />
+        <path class="signal-pulse" d="M 500 0 V 40 V 120 H 150 V 360 H 850 V 180 H 250 V 300 H 750 V 240 H 500 V 435" />
+        <path class="signal-pulse" d="M 633 0 V 60 H 508 V 128 H 158 V 352 H 842 V 188 H 258 V 292 H 742 V 248 H 508 V 435" />
+        <path class="signal-pulse" d="M 766 0 V 80 H 516 V 136 H 166 V 344 H 834 V 196 H 266 V 284 H 734 V 256 H 516 V 435" />
+        <path class="signal-pulse" d="M 900 0 V 100 H 524 V 144 H 174 V 336 H 826 V 204 H 274 V 276 H 726 V 264 H 524 V 435" />
+        <path class="signal-pulse" d="M 1000 100 H 900 V 476 H 904 V 126 H 616 V 874 H 844 V 226 H 676 V 774 H 784 V 476 H 565" />
+        <path class="signal-pulse" d="M 1000 233 H 920 V 484 H 896 V 134 H 624 V 866 H 836 V 234 H 684 V 766 H 776 V 484 H 565" />
+        <path class="signal-pulse" d="M 1000 366 H 940 V 492 H 888 V 142 H 632 V 858 H 828 V 242 H 692 V 758 H 768 V 492 H 565" />
+        <path class="signal-pulse" d="M 1000 500 H 960 H 880 V 150 H 640 V 850 H 820 V 250 H 700 V 750 H 760 V 500 H 565" />
+        <path class="signal-pulse" d="M 1000 633 H 940 V 508 H 872 V 158 H 648 V 842 H 812 V 258 H 708 V 742 H 752 V 508 H 565" />
+        <path class="signal-pulse" d="M 1000 766 H 920 V 516 H 864 V 166 H 656 V 834 H 804 V 266 H 716 V 734 H 744 V 516 H 565" />
+        <path class="signal-pulse" d="M 1000 900 H 900 V 524 H 856 V 174 H 664 V 826 H 796 V 274 H 724 V 726 H 736 V 524 H 565" />
+        <path class="signal-pulse" d="M 100 1000 V 900 H 476 V 904 H 126 V 616 H 874 V 844 H 226 V 676 H 774 V 784 H 476 V 565" />
+        <path class="signal-pulse" d="M 233 1000 V 920 H 484 V 896 H 134 V 624 H 866 V 836 H 234 V 684 H 766 V 776 H 484 V 565" />
+        <path class="signal-pulse" d="M 366 1000 V 940 H 492 V 888 H 142 V 632 H 858 V 828 H 242 V 692 H 758 V 768 H 492 V 565" />
+        <path class="signal-pulse" d="M 500 1000 V 960 V 880 H 150 V 640 H 850 V 820 H 250 V 700 H 750 V 760 H 500 V 565" />
+        <path class="signal-pulse" d="M 633 1000 V 940 H 508 V 872 H 158 V 648 H 842 V 812 H 258 V 708 H 742 V 752 H 508 V 565" />
+        <path class="signal-pulse" d="M 766 1000 V 920 H 516 V 864 H 166 V 656 H 834 V 804 H 266 V 716 H 734 V 744 H 516 V 565" />
+        <path class="signal-pulse" d="M 900 1000 V 900 H 524 V 856 H 174 V 664 H 826 V 796 H 274 V 724 H 726 V 736 H 524 V 565" />
+      </g>

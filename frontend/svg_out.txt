@@ -1,0 +1,176 @@
+      <path class="circuit-line" d="M 0 100 H 40 V 140 H 100 V 200 H 160 V 260 H 220 V 320 H 280 V 380 H 340 V 420 H 380 V 450 H 435" />
+      <circle class="circuit-via" cx="40" cy="140" r="4" />
+      <circle class="circuit-via" cx="160" cy="200" r="4" />
+      <circle class="circuit-via" cx="220" cy="320" r="4" />
+      <circle class="circuit-via" cx="340" cy="380" r="4" />
+      <circle class="circuit-via" cx="380" cy="450" r="4" />
+      <path class="circuit-line" d="M 0 300 H 60 V 220 H 120 V 280 H 180 V 340 H 240 V 400 H 300 V 440 H 360 V 475 H 435" />
+      <circle class="circuit-via" cx="60" cy="220" r="4" />
+      <circle class="circuit-via" cx="180" cy="280" r="4" />
+      <circle class="circuit-via" cx="240" cy="400" r="4" />
+      <circle class="circuit-via" cx="360" cy="440" r="4" />
+      <path class="circuit-line" d="M 0 500 H 80 V 460 H 140 V 540 H 200 V 480 H 260 V 520 H 320 V 500 H 435" />
+      <circle class="circuit-via" cx="80" cy="460" r="4" />
+      <circle class="circuit-via" cx="200" cy="540" r="4" />
+      <circle class="circuit-via" cx="260" cy="520" r="4" />
+      <path class="circuit-line" d="M 0 700 H 60 V 780 H 120 V 720 H 180 V 660 H 240 V 600 H 300 V 560 H 360 V 525 H 435" />
+      <circle class="circuit-via" cx="60" cy="780" r="4" />
+      <circle class="circuit-via" cx="180" cy="720" r="4" />
+      <circle class="circuit-via" cx="240" cy="600" r="4" />
+      <circle class="circuit-via" cx="360" cy="560" r="4" />
+      <path class="circuit-line" d="M 0 900 H 40 V 860 H 100 V 800 H 160 V 740 H 220 V 680 H 280 V 620 H 340 V 580 H 380 V 550 H 435" />
+      <circle class="circuit-via" cx="40" cy="860" r="4" />
+      <circle class="circuit-via" cx="160" cy="800" r="4" />
+      <circle class="circuit-via" cx="220" cy="680" r="4" />
+      <circle class="circuit-via" cx="340" cy="620" r="4" />
+      <circle class="circuit-via" cx="380" cy="550" r="4" />
+      <path class="circuit-line" d="M 0 150 H 60 V 100 H 120" />
+      <circle class="circuit-via" cx="120" cy="100" r="6" />
+      <path class="circuit-line" d="M 0 250 H 40 V 300 H 80 V 380" />
+      <circle class="circuit-via" cx="80" cy="380" r="6" />
+      <path class="circuit-line" d="M 0 400 H 100 V 320 H 140" />
+      <circle class="circuit-via" cx="140" cy="320" r="6" />
+      <path class="circuit-line" d="M 0 600 H 100 V 680 H 140" />
+      <circle class="circuit-via" cx="140" cy="680" r="6" />
+      <path class="circuit-line" d="M 0 850 H 60 V 900 H 120" />
+      <circle class="circuit-via" cx="120" cy="900" r="6" />
+      <path class="circuit-line" d="M 200 100 H 240 V 180 H 300" />
+      <circle class="circuit-via" cx="300" cy="180" r="6" />
+      <path class="circuit-line" d="M 180 850 H 240 V 780 H 300" />
+      <circle class="circuit-via" cx="300" cy="780" r="6" />
+      <path class="circuit-line" d="M 320 200 H 360 V 280 H 400" />
+      <circle class="circuit-via" cx="400" cy="280" r="6" />
+      <path class="circuit-line" d="M 320 800 H 360 V 720 H 400" />
+      <circle class="circuit-via" cx="400" cy="720" r="6" />
+      <path class="circuit-line" d="M 100 0 V 40 H 140 V 100 H 200 V 160 H 260 V 220 H 320 V 280 H 380 V 340 H 420 V 380 H 450 V 435" />
+      <circle class="circuit-via" cx="140" cy="40" r="4" />
+      <circle class="circuit-via" cx="200" cy="160" r="4" />
+      <circle class="circuit-via" cx="320" cy="220" r="4" />
+      <circle class="circuit-via" cx="380" cy="340" r="4" />
+      <circle class="circuit-via" cx="450" cy="380" r="4" />
+      <path class="circuit-line" d="M 300 0 V 60 H 220 V 120 H 280 V 180 H 340 V 240 H 400 V 300 H 440 V 360 H 475 V 435" />
+      <circle class="circuit-via" cx="220" cy="60" r="4" />
+      <circle class="circuit-via" cx="280" cy="180" r="4" />
+      <circle class="circuit-via" cx="400" cy="240" r="4" />
+      <circle class="circuit-via" cx="440" cy="360" r="4" />
+      <path class="circuit-line" d="M 500 0 V 80 H 460 V 140 H 540 V 200 H 480 V 260 H 520 V 320 H 500 V 435" />
+      <circle class="circuit-via" cx="460" cy="80" r="4" />
+      <circle class="circuit-via" cx="540" cy="200" r="4" />
+      <circle class="circuit-via" cx="520" cy="260" r="4" />
+      <path class="circuit-line" d="M 700 0 V 60 H 780 V 120 H 720 V 180 H 660 V 240 H 600 V 300 H 560 V 360 H 525 V 435" />
+      <circle class="circuit-via" cx="780" cy="60" r="4" />
+      <circle class="circuit-via" cx="720" cy="180" r="4" />
+      <circle class="circuit-via" cx="600" cy="240" r="4" />
+      <circle class="circuit-via" cx="560" cy="360" r="4" />
+      <path class="circuit-line" d="M 900 0 V 40 H 860 V 100 H 800 V 160 H 740 V 220 H 680 V 280 H 620 V 340 H 580 V 380 H 550 V 435" />
+      <circle class="circuit-via" cx="860" cy="40" r="4" />
+      <circle class="circuit-via" cx="800" cy="160" r="4" />
+      <circle class="circuit-via" cx="680" cy="220" r="4" />
+      <circle class="circuit-via" cx="620" cy="340" r="4" />
+      <circle class="circuit-via" cx="550" cy="380" r="4" />
+      <path class="circuit-line" d="M 150 0 V 60 H 100 V 120" />
+      <circle class="circuit-via" cx="100" cy="120" r="6" />
+      <path class="circuit-line" d="M 250 0 V 40 H 300 V 80 H 380" />
+      <circle class="circuit-via" cx="380" cy="80" r="6" />
+      <path class="circuit-line" d="M 400 0 V 100 H 320 V 140" />
+      <circle class="circuit-via" cx="320" cy="140" r="6" />
+      <path class="circuit-line" d="M 600 0 V 100 H 680 V 140" />
+      <circle class="circuit-via" cx="680" cy="140" r="6" />
+      <path class="circuit-line" d="M 850 0 V 60 H 900 V 120" />
+      <circle class="circuit-via" cx="900" cy="120" r="6" />
+      <path class="circuit-line" d="M 100 200 V 240 H 180 V 300" />
+      <circle class="circuit-via" cx="180" cy="300" r="6" />
+      <path class="circuit-line" d="M 850 180 V 240 H 780 V 300" />
+      <circle class="circuit-via" cx="780" cy="300" r="6" />
+      <path class="circuit-line" d="M 200 320 V 360 H 280 V 400" />
+      <circle class="circuit-via" cx="280" cy="400" r="6" />
+      <path class="circuit-line" d="M 800 320 V 360 H 720 V 400" />
+      <circle class="circuit-via" cx="720" cy="400" r="6" />
+      <path class="circuit-line" d="M 1000 100 H 960 V 140 H 900 V 200 H 840 V 260 H 780 V 320 H 720 V 380 H 660 V 420 H 620 V 450 H 565" />
+      <circle class="circuit-via" cx="960" cy="140" r="4" />
+      <circle class="circuit-via" cx="840" cy="200" r="4" />
+      <circle class="circuit-via" cx="780" cy="320" r="4" />
+      <circle class="circuit-via" cx="660" cy="380" r="4" />
+      <circle class="circuit-via" cx="620" cy="450" r="4" />
+      <path class="circuit-line" d="M 1000 300 H 940 V 220 H 880 V 280 H 820 V 340 H 760 V 400 H 700 V 440 H 640 V 475 H 565" />
+      <circle class="circuit-via" cx="940" cy="220" r="4" />
+      <circle class="circuit-via" cx="820" cy="280" r="4" />
+      <circle class="circuit-via" cx="760" cy="400" r="4" />
+      <circle class="circuit-via" cx="640" cy="440" r="4" />
+      <path class="circuit-line" d="M 1000 500 H 920 V 460 H 860 V 540 H 800 V 480 H 740 V 520 H 680 V 500 H 565" />
+      <circle class="circuit-via" cx="920" cy="460" r="4" />
+      <circle class="circuit-via" cx="800" cy="540" r="4" />
+      <circle class="circuit-via" cx="740" cy="520" r="4" />
+      <path class="circuit-line" d="M 1000 700 H 940 V 780 H 880 V 720 H 820 V 660 H 760 V 600 H 700 V 560 H 640 V 525 H 565" />
+      <circle class="circuit-via" cx="940" cy="780" r="4" />
+      <circle class="circuit-via" cx="820" cy="720" r="4" />
+      <circle class="circuit-via" cx="760" cy="600" r="4" />
+      <circle class="circuit-via" cx="640" cy="560" r="4" />
+      <path class="circuit-line" d="M 1000 900 H 960 V 860 H 900 V 800 H 840 V 740 H 780 V 680 H 720 V 620 H 660 V 580 H 620 V 550 H 565" />
+      <circle class="circuit-via" cx="960" cy="860" r="4" />
+      <circle class="circuit-via" cx="840" cy="800" r="4" />
+      <circle class="circuit-via" cx="780" cy="680" r="4" />
+      <circle class="circuit-via" cx="660" cy="620" r="4" />
+      <circle class="circuit-via" cx="620" cy="550" r="4" />
+      <path class="circuit-line" d="M 1000 150 H 940 V 100 H 880" />
+      <circle class="circuit-via" cx="880" cy="100" r="6" />
+      <path class="circuit-line" d="M 1000 250 H 960 V 300 H 920 V 380" />
+      <circle class="circuit-via" cx="920" cy="380" r="6" />
+      <path class="circuit-line" d="M 1000 400 H 900 V 320 H 860" />
+      <circle class="circuit-via" cx="860" cy="320" r="6" />
+      <path class="circuit-line" d="M 1000 600 H 900 V 680 H 860" />
+      <circle class="circuit-via" cx="860" cy="680" r="6" />
+      <path class="circuit-line" d="M 1000 850 H 940 V 900 H 880" />
+      <circle class="circuit-via" cx="880" cy="900" r="6" />
+      <path class="circuit-line" d="M 800 100 H 760 V 180 H 700" />
+      <circle class="circuit-via" cx="700" cy="180" r="6" />
+      <path class="circuit-line" d="M 820 850 H 760 V 780 H 700" />
+      <circle class="circuit-via" cx="700" cy="780" r="6" />
+      <path class="circuit-line" d="M 680 200 H 640 V 280 H 600" />
+      <circle class="circuit-via" cx="600" cy="280" r="6" />
+      <path class="circuit-line" d="M 680 800 H 640 V 720 H 600" />
+      <circle class="circuit-via" cx="600" cy="720" r="6" />
+      <path class="circuit-line" d="M 100 1000 V 960 H 140 V 900 H 200 V 840 H 260 V 780 H 320 V 720 H 380 V 660 H 420 V 620 H 450 V 565" />
+      <circle class="circuit-via" cx="140" cy="960" r="4" />
+      <circle class="circuit-via" cx="200" cy="840" r="4" />
+      <circle class="circuit-via" cx="320" cy="780" r="4" />
+      <circle class="circuit-via" cx="380" cy="660" r="4" />
+      <circle class="circuit-via" cx="450" cy="620" r="4" />
+      <path class="circuit-line" d="M 300 1000 V 940 H 220 V 880 H 280 V 820 H 340 V 760 H 400 V 700 H 440 V 640 H 475 V 565" />
+      <circle class="circuit-via" cx="220" cy="940" r="4" />
+      <circle class="circuit-via" cx="280" cy="820" r="4" />
+      <circle class="circuit-via" cx="400" cy="760" r="4" />
+      <circle class="circuit-via" cx="440" cy="640" r="4" />
+      <path class="circuit-line" d="M 500 1000 V 920 H 460 V 860 H 540 V 800 H 480 V 740 H 520 V 680 H 500 V 565" />
+      <circle class="circuit-via" cx="460" cy="920" r="4" />
+      <circle class="circuit-via" cx="540" cy="800" r="4" />
+      <circle class="circuit-via" cx="520" cy="740" r="4" />
+      <path class="circuit-line" d="M 700 1000 V 940 H 780 V 880 H 720 V 820 H 660 V 760 H 600 V 700 H 560 V 640 H 525 V 565" />
+      <circle class="circuit-via" cx="780" cy="940" r="4" />
+      <circle class="circuit-via" cx="720" cy="820" r="4" />
+      <circle class="circuit-via" cx="600" cy="760" r="4" />
+      <circle class="circuit-via" cx="560" cy="640" r="4" />
+      <path class="circuit-line" d="M 900 1000 V 960 H 860 V 900 H 800 V 840 H 740 V 780 H 680 V 720 H 620 V 660 H 580 V 620 H 550 V 565" />
+      <circle class="circuit-via" cx="860" cy="960" r="4" />
+      <circle class="circuit-via" cx="800" cy="840" r="4" />
+      <circle class="circuit-via" cx="680" cy="780" r="4" />
+      <circle class="circuit-via" cx="620" cy="660" r="4" />
+      <circle class="circuit-via" cx="550" cy="620" r="4" />
+      <path class="circuit-line" d="M 150 1000 V 940 H 100 V 880" />
+      <circle class="circuit-via" cx="100" cy="880" r="6" />
+      <path class="circuit-line" d="M 250 1000 V 960 H 300 V 920 H 380" />
+      <circle class="circuit-via" cx="380" cy="920" r="6" />
+      <path class="circuit-line" d="M 400 1000 V 900 H 320 V 860" />
+      <circle class="circuit-via" cx="320" cy="860" r="6" />
+      <path class="circuit-line" d="M 600 1000 V 900 H 680 V 860" />
+      <circle class="circuit-via" cx="680" cy="860" r="6" />
+      <path class="circuit-line" d="M 850 1000 V 940 H 900 V 880" />
+      <circle class="circuit-via" cx="900" cy="880" r="6" />
+      <path class="circuit-line" d="M 100 800 V 760 H 180 V 700" />
+      <circle class="circuit-via" cx="180" cy="700" r="6" />
+      <path class="circuit-line" d="M 850 820 V 760 H 780 V 700" />
+      <circle class="circuit-via" cx="780" cy="700" r="6" />
+      <path class="circuit-line" d="M 200 680 V 640 H 280 V 600" />
+      <circle class="circuit-via" cx="280" cy="600" r="6" />
+      <path class="circuit-line" d="M 800 680 V 640 H 720 V 600" />
+      <circle class="circuit-via" cx="720" cy="600" r="6" />
