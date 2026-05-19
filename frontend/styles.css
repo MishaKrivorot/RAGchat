@@ -611,7 +611,7 @@ body.dark .msg-text a:visited {
   stroke-linejoin: bevel;
   stroke-dasharray: 3000;
   stroke-dashoffset: 3000;
-  animation: drawSignal 4s ease-in-out forwards;
+  animation: drawSignal 2s ease-in-out forwards;
 }
 
 .chip-center {
@@ -619,7 +619,7 @@ body.dark .msg-text a:visited {
   stroke: var(--accent);
   stroke-width: 3;
   opacity: 0;
-  animation: powerUp 0.8s 4.0s forwards, pulseGlow 2s 4.8s infinite alternate ease-in-out;
+  animation: powerUp 0.5s 2.0s forwards, pulseGlow 2s 2.5s infinite alternate ease-in-out;
 }
 
 .chip-inner {
@@ -627,13 +627,13 @@ body.dark .msg-text a:visited {
   stroke: var(--accent);
   stroke-width: 1.5;
   opacity: 0;
-  animation: powerUp 0.8s 4.2s forwards;
+  animation: powerUp 0.5s 2.1s forwards;
 }
 
 .chip-pattern {
   opacity: 0;
   pointer-events: none;
-  animation: powerUp 0.8s 4.4s forwards, pulseGlow 3s 5.2s infinite alternate ease-in-out;
+  animation: powerUp 0.5s 2.2s forwards, pulseGlow 3s 2.7s infinite alternate ease-in-out;
 }
 
 .circuit-node {
@@ -641,7 +641,7 @@ body.dark .msg-text a:visited {
   stroke: var(--accent);
   stroke-width: 2.5;
   opacity: 0;
-  animation: powerUp 0.8s 4.0s forwards, pulseGlow 2s 4.8s infinite alternate ease-in-out;
+  animation: powerUp 0.5s 2.0s forwards, pulseGlow 2s 2.5s infinite alternate ease-in-out;
 }
 
 .signal-pulse {
@@ -664,7 +664,7 @@ body.dark .msg-text a:visited {
   letter-spacing: 3px;
   opacity: 0;
   pointer-events: none;
-  animation: fadeInChipText 0.8s 4.0s forwards;
+  animation: fadeInChipText 0.5s 2.0s forwards;
 }
 
 .start-text {
@@ -680,7 +680,7 @@ body.dark .msg-text a:visited {
   text-shadow: 0 0 8px var(--accent);
   text-align: center;
   padding: 0 20px;
-  animation: fadeInText 1s 4.5s forwards, blinkText 2.5s 5.5s infinite;
+  animation: fadeInText 0.8s 2.3s forwards, blinkText 2.5s 3.1s infinite;
 }
 
 @keyframes drawSignal {

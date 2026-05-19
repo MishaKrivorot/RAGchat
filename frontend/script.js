@@ -160,7 +160,32 @@ function buildSourcesHtml(sources) {
   return html;
 }
 
-function addMessage(text, who = "bot", meta = null) {
+/* ---------------- ЗБЕРЕЖЕННЯ ІСТОРІЇ (LOCAL STORAGE) ---------------- */
+let chatHistory = JSON.parse(localStorage.getItem('frecsChatHistory')) || [];
+
+function saveHistory() {
+  localStorage.setItem('frecsChatHistory', JSON.stringify(chatHistory));
+}
+
+function loadHistory() {
+  if (chatHistory.length === 0) {
+    // Якщо історія порожня, додаємо привітання (але не зберігаємо його в пам'ять)
+    addMessage(
+      "Вітаю! Я чат-бот університету. Постав запитання щодо вступу, навчання, розкладу або документів.",
+      "bot",
+      { mode: "greeting", confidence: 1.0 },
+      false
+    );
+  } else {
+    // Відмальовуємо збережені повідомлення
+    chatHistory.forEach(msg => {
+      renderMessageUI(msg.text, msg.who, msg.meta);
+    });
+  }
+}
+
+// Функція ТІЛЬКИ для відмальовки (без збереження)
+function renderMessageUI(text, who, meta) {
   const row = document.createElement("div");
   row.className = `msg-row ${who === "user" ? "user-row" : "bot-row"}`;
 
@@ -178,23 +203,15 @@ function addMessage(text, who = "bot", meta = null) {
 
   if (meta && who === "bot") {
     const chips = [];
-
     if (meta.mode) {
-      chips.push(
-        `<span class="meta-chip mode-${escapeHtml(meta.mode)}">Режим: ${escapeHtml(getModeLabel(meta.mode))}</span>`
-      );
+      chips.push(`<span class="meta-chip mode-${escapeHtml(meta.mode)}">Режим: ${escapeHtml(getModeLabel(meta.mode))}</span>`);
     }
-
     if (typeof meta.confidence === "number") {
-      chips.push(
-        `<span class="meta-chip">Впевненість: ${meta.confidence.toFixed(3)}</span>`
-      );
+      chips.push(`<span class="meta-chip">Впевненість: ${meta.confidence.toFixed(3)}</span>`);
     }
-
     if (chips.length > 0) {
       html += `<div class="msg-meta">${chips.join("")}</div>`;
     }
-
     html += buildSourcesHtml(meta.sources);
   }
 
@@ -202,6 +219,15 @@ function addMessage(text, who = "bot", meta = null) {
   row.appendChild(box);
   messagesEl.appendChild(row);
   scrollToBottom();
+}
+
+// Головна функція додавання повідомлення (відмальовка + збереження)
+function addMessage(text, who = "bot", meta = null, save = true) {
+  renderMessageUI(text, who, meta);
+  if (save) {
+    chatHistory.push({ text, who, meta });
+    saveHistory();
+  }
 }
 
 function addLoader() {
@@ -230,11 +256,23 @@ function removeLoader() {
 /* ---------------- API ---------------- */
 async function checkApi() {
   try {
-    const resp = await fetch(HEALTH_URL, { method: "GET" });
+    apiBadge.textContent = "API: checking...";
+    apiBadge.style.color = "inherit";
+
+    // Додаємо timeout 5 секунд, щоб перевірка не зависала, якщо сервер спить
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 5000);
+
+    const resp = await fetch(HEALTH_URL, { method: "GET", signal: controller.signal });
+    clearTimeout(timeoutId);
+
     if (!resp.ok) throw new Error("API unavailable");
+
     apiBadge.textContent = "API: online";
+    apiBadge.style.color = "var(--success)"; // Зелений колір
   } catch {
     apiBadge.textContent = "API: offline";
+    apiBadge.style.color = "var(--danger)"; // Червоний колір
   }
 }
 
@@ -316,11 +354,7 @@ document.addEventListener("visibilitychange", () => {
   }
 });
 
-addMessage(
-  "Вітаю! Я чат-бот університету. Постав запитання щодо вступу, навчання, розкладу або документів.",
-  "bot",
-  { mode: "greeting", confidence: 1.0 }
-);
+loadHistory();
 
 
 
@@ -396,5 +430,5 @@ document.addEventListener('DOMContentLoaded', () => {
         pulse.style.animation = `runPulse ${duration}s ${randomDelay}s infinite linear`;
       });
     }
-  }, 5200); // Починаємо логіку після завершення вступу
+  }, 2700); // Починаємо логіку після завершення вступу
 });
