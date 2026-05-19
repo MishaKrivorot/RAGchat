@@ -310,10 +310,9 @@ checkApi();
 document.addEventListener("visibilitychange", () => {
   if (document.hidden) {
     clearInterval(cometInterval);
-    document.body.classList.add("paused-animation");
   } else {
+    clearInterval(cometInterval);
     cometInterval = setInterval(spawnComet, 2500);
-    document.body.classList.remove("paused-animation");
   }
 });
 

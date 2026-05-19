@@ -59,35 +59,33 @@ body.light {
   z-index: -3;
 }
 
+/* 🔥 РОЗТЯГУВАННЯ ЕКРАНУ: Робимо сторінку Flex-контейнером на 100vh */
 .page {
   width: min(1000px, calc(100% - 32px));
   margin: 0 auto;
-  padding: 28px 0 48px;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  /* Займає всю висоту екрану браузера */
+  padding: 3vh 0 4vh;
+  /* Адаптивні відступи зверху і знизу */
   position: relative;
   z-index: 1;
 }
 
 .hero {
   text-align: center;
-  margin-bottom: 20px;
+  margin-bottom: 14px;
+  flex-shrink: 0;
+  /* Шапка не стискається */
 }
 
 .logo {
-  width: 96px;
+  width: 75px;
+  /* Зменшили логотип для економії місця */
   display: block;
-  margin: 0 auto 16px;
+  margin: 0 auto;
   filter: drop-shadow(0 0 10px rgba(73, 223, 242, 0.2));
-}
-
-.hero h1 {
-  margin: 0 0 8px;
-  font-size: clamp(28px, 5vw, 42px);
-}
-
-.subtitle {
-  margin: 0;
-  opacity: 0.85;
-  font-size: 15px;
 }
 
 .comet {
@@ -131,11 +129,12 @@ body.light .comet {
 
 @keyframes shipMove {
   0% {
-    transform: translateX(-25vw);
+    transform: translateX(-40vw);
   }
 
+  /* 🔥 ЗМІНА: Починає рух далеко за екраном, щоб не стрибало */
   100% {
-    transform: translateX(150vw);
+    transform: translateX(120vw);
   }
 }
 
@@ -155,13 +154,22 @@ body.light .comet {
   transform: scale(1.12);
 }
 
+/* 🔥 РОЗТЯГУВАННЯ ЧАТУ: Wrapper займає весь вільний простір */
 .chat-wrapper {
   max-width: 760px;
+  width: 100%;
   margin: 0 auto;
   padding: 20px;
   border-radius: 18px;
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
+
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  /* Тягнеться до низу */
+  overflow: hidden;
+  /* Обрізає зайве */
 }
 
 body.dark .chat-wrapper {
@@ -179,27 +187,29 @@ body.light .chat-wrapper {
 .chat-topbar {
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-start;
   gap: 14px;
   margin-bottom: 14px;
+  flex-shrink: 0;
 }
 
 .chat-topbar h2 {
-  margin: 0 0 4px;
-  font-size: 22px;
+  margin: 0 0 6px;
+  font-size: 20px;
 }
 
 .chat-hint {
   margin: 0;
-  font-size: 14px;
+  font-size: 13px;
   opacity: 0.8;
+  line-height: 1.4;
 }
 
 .api-badge {
   white-space: nowrap;
-  padding: 8px 12px;
+  padding: 6px 10px;
   border-radius: 999px;
-  font-size: 13px;
+  font-size: 12px;
   font-weight: bold;
 }
 
@@ -213,8 +223,10 @@ body.light .api-badge {
   border: 1px solid rgba(0, 0, 0, 0.12);
 }
 
+/* 🔥 РОЗТЯГУВАННЯ ПОВІДОМЛЕНЬ: Автоматична висота замість фіксованих 430px */
 .messages {
-  height: 430px;
+  flex-grow: 1;
+  /* Розтягується на всю доступну висоту */
   overflow-y: auto;
   padding: 14px;
   border-radius: 14px;
@@ -246,7 +258,7 @@ body.light .messages {
 }
 
 .msg {
-  max-width: 82%;
+  max-width: 85%;
   padding: 12px 14px;
   border-radius: 14px;
   line-height: 1.5;
@@ -353,13 +365,15 @@ body.light .source-card {
 .chat-form {
   display: flex;
   gap: 10px;
+  flex-shrink: 0;
 }
 
 .chat-form input {
   flex: 1;
   padding: 13px 14px;
   border-radius: 12px;
-  font-size: 15px;
+  font-size: 16px;
+  /* 🔥 ВАЖЛИВО: 16px запобігає авто-зуму на iPhone */
   outline: none;
   transition: border-color 0.2s, background 0.2s, opacity 0.2s;
 }
@@ -389,7 +403,7 @@ body.light .chat-form input {
   cursor: pointer;
   transition: 0.2s;
   font-size: 15px;
-  min-width: 130px;
+  min-width: 110px;
 }
 
 .chat-form button:hover {
@@ -490,7 +504,6 @@ body.light .msg-text th {
   margin-bottom: 0;
 }
 
-/* Стилі для розгорток джерел */
 details.source-card summary {
   cursor: pointer;
   user-select: none;
@@ -502,13 +515,11 @@ details.source-card summary:hover {
   opacity: 0.8;
 }
 
-/* Трохи анімації для відкриття */
 details.source-card[open] summary {
   margin-bottom: 5px;
   color: var(--accent);
 }
 
-/* Кнопка лайку */
 .like-btn {
   background: transparent;
   border: 1px solid rgba(127, 127, 127, 0.3);
@@ -522,7 +533,6 @@ details.source-card[open] summary {
 
 .like-btn:hover {
   background: rgba(74, 222, 128, 0.2);
-  /* Легкий зелений фон при наведенні */
   border-color: rgba(74, 222, 128, 0.6);
 }
 
@@ -533,7 +543,6 @@ details.source-card[open] summary {
   pointer-events: none;
 }
 
-/* Стилі для посилань у повідомленнях */
 .msg-text a {
   color: #2563eb;
   text-decoration: none;
@@ -550,16 +559,14 @@ details.source-card[open] summary {
   text-decoration: underline;
 }
 
-/* Яскраві кольори для темної теми */
 body.dark .msg-text a {
   color: #38bdf8;
-  /* Світло-блакитний (добре читається на чорному) */
 }
 
 body.dark .msg-text a:visited {
   color: #c084fc;
-  /* Світло-фіолетовий (замість темного стандартного) */
 }
+
 
 /* ========================================= */
 /* АНІМАЦІЯ МІКРОСХЕМИ (INTRO SCREEN)        */
@@ -601,9 +608,7 @@ body.dark .msg-text a:visited {
   stroke: var(--accent);
   stroke-width: 3;
   stroke-linecap: square;
-  /* 🔥 ЗМІНА: bevel ідеально підходить для 45-градусних PCB-зрізів */
   stroke-linejoin: bevel;
-
   stroke-dasharray: 3000;
   stroke-dashoffset: 3000;
   animation: drawSignal 4s ease-in-out forwards;
@@ -613,59 +618,42 @@ body.dark .msg-text a:visited {
   fill: var(--bg-dark);
   stroke: var(--accent);
   stroke-width: 3;
-  /* Трохи тонше для подвійного контуру */
   opacity: 0;
-  animation:
-    powerUp 0.8s 4.0s forwards,
-    pulseGlow 2s 4.8s infinite alternate ease-in-out;
+  animation: powerUp 0.8s 4.0s forwards, pulseGlow 2s 4.8s infinite alternate ease-in-out;
 }
 
-/* 🔥 ДОДАНО: Внутрішнє ядро процесора */
 .chip-inner {
   fill: rgba(73, 223, 242, 0.05);
-  /* Легка заливка */
   stroke: var(--accent);
   stroke-width: 1.5;
   opacity: 0;
   animation: powerUp 0.8s 4.2s forwards;
-  /* Вмикається на мить пізніше */
 }
 
 .chip-pattern {
   opacity: 0;
-  animation: powerUp 0.8s 4.4s forwards, pulseGlow 3s 5.2s infinite alternate ease-in-out;
   pointer-events: none;
+  animation: powerUp 0.8s 4.4s forwards, pulseGlow 3s 5.2s infinite alternate ease-in-out;
 }
 
-/* 🔥 ДОДАНО: Контактні кільця на кінцях доріжок */
 .circuit-node {
   fill: var(--bg-dark);
   stroke: var(--accent);
   stroke-width: 2.5;
   opacity: 0;
-  /* Запалюються разом із процесором */
-  animation:
-    powerUp 0.8s 4.0s forwards,
-    pulseGlow 2s 4.8s infinite alternate ease-in-out;
+  animation: powerUp 0.8s 4.0s forwards, pulseGlow 2s 4.8s infinite alternate ease-in-out;
 }
 
-/* 🔥 ДОДАНО: Стилі для біжучих імпульсів (даних) */
 .signal-pulse {
   fill: none;
   stroke: #ffffff;
-  /* Яскраво-білий колір імпульсу */
   stroke-width: 4;
-  /* Трохи товстіший за лінію */
   stroke-linecap: round;
   stroke-linejoin: miter;
-
-  /* 15px - довжина імпульсу, 2000px - величезна порожнеча за ним */
   stroke-dasharray: 15 2000;
   stroke-dashoffset: 0;
   opacity: 0;
-  /* Невидимий до початку анімації */
   filter: drop-shadow(0 0 6px rgba(255, 255, 255, 0.9));
-  /* Світіння */
 }
 
 .chip-text {
@@ -673,12 +661,9 @@ body.dark .msg-text a:visited {
   font-size: 24px;
   font-weight: bold;
   fill: var(--accent);
-  /* Колір під колір ліній */
   letter-spacing: 3px;
   opacity: 0;
   pointer-events: none;
-  /* Щоб клік проходив крізь текст на сам екран */
-  /* З'являється синхронно з увімкненням процесора на 4-й секунді */
   animation: fadeInChipText 0.8s 4.0s forwards;
 }
 
@@ -695,26 +680,9 @@ body.dark .msg-text a:visited {
   text-shadow: 0 0 8px var(--accent);
   text-align: center;
   padding: 0 20px;
-  /* 🔥 ЗМІНА: Текст з'являється після ввімкнення процесора (4.5с) */
   animation: fadeInText 1s 4.5s forwards, blinkText 2.5s 5.5s infinite;
 }
 
-/* Окремі налаштування для телефонів */
-@media (max-width: 768px) {
-  .start-text {
-    font-size: 12px;
-    letter-spacing: 2px;
-    /* На мобільних опускаємо ще нижче */
-    bottom: 5vh;
-  }
-
-  .circuit-line {
-    /* Товстіші лінії краще виглядають на маленьких екранах */
-    stroke-width: 4;
-  }
-}
-
-/* --- КЛЮЧОВІ КАДРИ (KEYFRAMES) --- */
 @keyframes drawSignal {
   to {
     stroke-dashoffset: 0;
@@ -729,23 +697,17 @@ body.dark .msg-text a:visited {
 
   1% {
     opacity: 1;
-    /* Швидко з'являється */
   }
 
   20% {
     opacity: 1;
-    /* Тримається видимим */
   }
 
-  /* Активна фаза руху закінчується на 30% часу */
   30% {
     stroke-dashoffset: -2000;
-    /* 🔥 Збільшено travel distance */
     opacity: 0;
-    /* Плавно розчиняється */
   }
 
-  /* Решта 70% часу — тиша (імпульс прихований) */
   100% {
     stroke-dashoffset: -2000;
     opacity: 0;
@@ -806,36 +768,106 @@ body.dark .msg-text a:visited {
   }
 }
 
+
+/* ========================================= */
+/* 🔥 АДАПТАЦІЯ ПІД МОБІЛЬНІ ПРИСТРОЇ        */
+/* ========================================= */
 @media (max-width: 768px) {
   .page {
-    width: min(100%, calc(100% - 20px));
-    padding-top: 18px;
+    width: 100%;
+    /* На весь екран */
+    padding: 2vh 12px 2vh;
+    /* Менші відступи по краях */
+  }
+
+  .logo {
+    width: 55px;
+    /* Ще менше лого */
+    margin-bottom: 8px;
   }
 
   .chat-wrapper {
-    padding: 14px;
+    padding: 12px;
+    border-radius: 16px;
   }
 
   .chat-topbar {
-    flex-direction: column;
+    flex-direction: row;
+    /* Залишаємо бейдж і текст в один ряд */
     align-items: flex-start;
+    gap: 8px;
+    margin-bottom: 10px;
+  }
+
+  .chat-topbar h2 {
+    font-size: 16px;
+    /* Менший заголовок */
+    margin-bottom: 4px;
+  }
+
+  .chat-hint {
+    font-size: 11px;
+    line-height: 1.3;
+  }
+
+  .api-badge {
+    padding: 4px 8px;
+    font-size: 10px;
+    margin-top: 2px;
   }
 
   .messages {
-    height: 380px;
+    padding: 10px;
+    border-radius: 12px;
+    margin-bottom: 10px;
   }
 
   .msg {
-    max-width: 92%;
+    max-width: 95%;
+    /* Повідомлення можуть бути ширшими на телефоні */
+    padding: 10px 12px;
+    font-size: 14px;
+    border-radius: 12px;
+  }
+
+  .msg-text {
+    font-size: 14px;
   }
 
   .chat-form {
-    flex-direction: column;
+    flex-direction: row;
+    /* 🔥 ВАЖЛИВО: Поле і кнопка в один рядок */
+    gap: 8px;
+  }
+
+  .chat-form input {
+    padding: 12px 14px;
+    font-size: 16px;
+    /* Захист від зуму на iOS */
   }
 
   .chat-form button {
-    width: 100%;
+    min-width: 90px;
+    /* Зменшуємо кнопку */
+    padding: 12px 14px;
+    font-size: 14px;
+  }
+
+  .theme-toggle {
+    top: 10px;
+    right: 12px;
+    font-size: 22px;
+  }
+
+  .start-text {
+    font-size: 12px;
+    letter-spacing: 2px;
+    bottom: 6vh;
+  }
+
+  .circuit-line {
+    stroke-width: 4;
   }
 }
-/* Pause animations in background */
-body.paused-animation * { animation-play-state: paused !important; }
+
+/* 🔥 ВАЖЛИВО: Видалили .paused-animation, щоб ракети не "стріляли" після згортання вкладки */
