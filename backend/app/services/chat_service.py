@@ -1,8 +1,30 @@
+import os
+from datetime import datetime
 from app.config import settings
 from app.services.llm_service import LLMService
 from app.services.retrieval_service import RetrievalService
-from app.services.web_search_service import WebSearchService  # Додано сервіс веб-пошуку
+from app.services.web_search_service import WebSearchService  # Сервіс веб-пошуку
 from app.utils.greetings import is_greeting, greeting_response
+
+# ==========================================
+# 🔥 АНАЛІТИКА СЛІПИХ ЗОН
+# ==========================================
+def log_unanswered_query(query: str):
+    """Фіксує запити, на які бот не зміг знайти відповідь"""
+    timestamp = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+    log_message = f"[{timestamp}] UNANSWERED: {query}"
+    
+    # 1. Виводимо в консоль (Надійно зберігається у логах Railway)
+    print(f"🚨 {log_message}", flush=True)
+    
+    # 2. Зберігаємо у файл (Для зручності локального тестування)
+    try:
+        os.makedirs("data", exist_ok=True)
+        with open("data/unanswered_queries.log", "a", encoding="utf-8") as f:
+            f.write(log_message + "\n")
+    except Exception as e:
+        print(f"Не вдалося записати в лог-файл: {e}")
+# ==========================================
 
 
 class ChatService:
@@ -44,7 +66,7 @@ class ChatService:
         top_score = results[0].get("reranked_score", results[0].get("score", 0.0)) if results else 0.0
         min_score = settings.SIMILARITY_THRESHOLD
 
-        # 🔥 FALLBACK (ВЕБ-ПОШУК): Якщо результатів немає або впевненість занадто низька
+        # 🔥 FALLBACK (ВЕБ-ПОШУК ТА СЛІПІ ЗОНИ)
         if not results or top_score < min_score:
             web_results = self.web_search.search(search_question, limit=3)
 
@@ -52,7 +74,7 @@ class ChatService:
                 try:
                     answer = self.llm_service.generate_web_answer(question, web_results)
                     
-                    # Маскуємо результати під стандартні "джерела", щоб фронтенд малював розгортки
+                    # Маскуємо результати під стандартні "джерела"
                     formatted_web_sources = [
                         {
                             "question": f"Знайдено в мережі: {r['title']}",
@@ -70,9 +92,12 @@ class ChatService:
                         "fallback_links": fallback_links
                     }
                 except Exception as e:
-                    pass # Якщо сталася помилка LLM при роботі з інтернетом, йдемо до генерації відмови
+                    pass # Якщо помилка LLM, йдемо до генерації відмови
 
-            # Якщо і в інтернеті нічого немає або виникла помилка
+            # 🚨 ЯКЩО МИ ДІЙШЛИ СЮДИ — ВІДПОВІДІ НЕМАЄ НІДЕ!
+            # Фіксуємо цей запит в аналітику
+            log_unanswered_query(question)
+
             if settings.USE_LLM and self.llm_service:
                 try:
                     answer = self.llm_service.generate_no_context_answer(question)
@@ -116,7 +141,6 @@ class ChatService:
         if not filtered_sources:
             filtered_sources = [sources[0]]
 
-        # 🔥 ЗМІНА: Беремо всі 5 джерел для глибокого аналізу, а не 1
         filtered_sources = filtered_sources[:5]
 
         if settings.USE_LLM and self.llm_service:
