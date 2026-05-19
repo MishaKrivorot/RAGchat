@@ -75,14 +75,8 @@ function initShips() {
     if (!ship) return;
     ship.style.display = "block";
     ship.style.top = (10 + Math.random() * 70) + "%";
-    ship.style.animationDuration = (18 + Math.random() * 25) + "s";
+    ship.style.animationDuration = (20 + Math.random() * 15) + "s";
     ship.style.animationDelay = (index * 12) + "s";
-
-    // Оновлюємо позицію та швидкість кожного разу, коли корабель завершує проліт
-    ship.addEventListener("animationiteration", () => {
-      ship.style.top = (10 + Math.random() * 70) + "%";
-      ship.style.animationDuration = (18 + Math.random() * 25) + "s";
-    });
   });
 }
 
@@ -100,7 +94,29 @@ function scrollToBottom() {
 function setLoadingState(isLoading) {
   sendBtn.disabled = isLoading;
   qInput.disabled = isLoading;
-  sendBtn.textContent = isLoading ? "Надсилання..." : "Надіслати";
+
+  if (isLoading) {
+    sendBtn.innerHTML = `<span class="btn-text">Надсилання...</span><span class="btn-icon">⏳</span>`;
+  } else {
+    sendBtn.innerHTML = `<span class="btn-text">Надіслати</span><span class="btn-icon">➤</span>`;
+  }
+}
+
+const clearHistoryBtn = document.getElementById("clearHistoryBtn");
+if (clearHistoryBtn) {
+  clearHistoryBtn.addEventListener("click", () => {
+    if (confirm("Ви впевнені, що хочете очистити історію чату?")) {
+      chatHistory = [];
+      saveHistory();
+      messagesEl.innerHTML = ""; // Очищаємо екран
+      addMessage(
+        "Історію очищено. Чим я можу допомогти?",
+        "bot",
+        { mode: "greeting", confidence: 1.0 },
+        false
+      );
+    }
+  });
 }
 
 function getModeLabel(mode) {

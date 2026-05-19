@@ -193,7 +193,6 @@
   <img id="ship1" class="ship" src="nlo.png" alt="UFO">
   <img id="ship2" class="ship" src="rocket.png" alt="Rocket">
 
-  <button class="theme-toggle" id="themeIcon" type="button" aria-label="Змінити тему">🌙</button>
 
   <main class="page">
     <header class="hero">
@@ -206,14 +205,21 @@
           <h2>FAQ Chatbot факультету РЕКС</h2>
           <p class="chat-hint">Постав питання щодо студентського життя (вступу, поселення, навчання та розкладу)</p>
         </div>
-        <div class="api-badge" id="apiBadge">API: offline</div>
+        <div class="topbar-actions">
+          <div class="api-badge" id="apiBadge">API: offline</div>
+          <button id="clearHistoryBtn" class="action-btn" title="Очистити історію">🗑️</button>
+          <button id="themeIcon" class="action-btn" type="button" aria-label="Змінити тему">🌙</button>
+        </div>
       </div>
 
       <div class="messages" id="messages"></div>
 
       <form id="chatForm" class="chat-form">
         <input id="q" type="text" placeholder="Напишіть питання..." autocomplete="off" />
-        <button id="send" type="submit">Надіслати</button>
+        <button id="send" type="submit">
+          <span class="btn-text">Надіслати</span>
+          <span class="btn-icon">➤</span>
+        </button>
       </form>
     </section>
   </main>

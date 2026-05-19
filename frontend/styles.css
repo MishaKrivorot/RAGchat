@@ -870,4 +870,73 @@ body.dark .msg-text a:visited {
   }
 }
 
-/* 🔥 ВАЖЛИВО: Видалили .paused-animation, щоб ракети не "стріляли" після згортання вкладки */
+.topbar-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.action-btn {
+  background: transparent;
+  border: 1px solid rgba(127, 127, 127, 0.3);
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 16px;
+  padding: 6px 8px;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+body.dark .action-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+body.light .action-btn:hover {
+  background: rgba(0, 0, 0, 0.05);
+}
+
+/* Налаштування кнопки відправки для десктопу */
+.btn-icon {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .chat-topbar {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .topbar-actions {
+    width: 100%;
+    justify-content: flex-end;
+    margin-top: 10px;
+  }
+
+  .api-badge {
+    margin-right: auto;
+  }
+
+  .btn-text {
+    display: none;
+  }
+
+  .btn-icon {
+    display: block;
+    font-size: 18px;
+    color: white;
+  }
+
+  .chat-form button {
+    min-width: 48px !important;
+    width: 48px;
+    height: 48px;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 12px;
+  }
+}
