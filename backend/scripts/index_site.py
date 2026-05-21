@@ -15,6 +15,7 @@ START_URLS = [
     "https://rex.knu.ua/faculty/about-us/",               # Про факультет
     "https://rex.knu.ua/faculty/deans-office/",           # Деканат
     "https://rex.knu.ua/faculty/departments/",            # Кафедри факультету
+    "https://rex.knu.ua/osvitni-programy/",               # Освітні програми
     
     # --- ДЛЯ ВСТУПНИКІВ (АБІТУРІЄНТІВ) ---
     "https://rex.knu.ua/for-graduates/for-entrance/",     # Загальна інформація до вступу
@@ -23,7 +24,8 @@ START_URLS = [
     "https://rex.knu.ua/for-graduates/for-entrance/masters/",        # Вступ до магістратури
     "https://rex.knu.ua/vstup-do-aspirantury/",           # Вступ до аспірантури
     "https://rex.knu.ua/for-graduates/for-entrance/pre-entry-courses/", # Підготовчі курси
-    "https://rex.knu.ua/category/dlya-abituriyentiv/",    # Новини для абітурієнтів, дні відкритих дверей
+    "https://rex.knu.ua/category/dlya-abituriyentiv/",    # Новини для абітурієнтів
+    "https://rex.knu.ua/for-graduates/trainings-for-eig/",# Тренінги для ЄВІ/ЄФВВ
     
     # --- ДЛЯ СТУДЕНТІВ ---
     "https://rex.knu.ua/for-students/",                   # Головна сторінка студента
@@ -33,8 +35,11 @@ START_URLS = [
     "https://rex.knu.ua/for-students/dormitory/",         # Гуртожиток
     "https://rex.knu.ua/for-students/books-for-study/",   # Навчальні матеріали
     "https://rex.knu.ua/for-students/student-organizations/", # Студентські організації
+    "https://rex.knu.ua/vybir-navchalnyh-dystsyplin/",    # Вибір навчальних дисциплін
+    "https://rex.knu.ua/dodatkovi-baly/",                 # Додаткові бали
+    "https://rex.knu.ua/pidsumkova-atestatsiya/",         # Підсумкова атестація
     
-    # Додаткові сторінки
+    # додаткові сторінки
     "https://rex.knu.ua/contacts/"                        # Загальні контакти
 ]
 
