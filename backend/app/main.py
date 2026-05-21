@@ -3,7 +3,6 @@ from fastapi.middleware.cors import CORSMiddleware
 from app.config import settings
 from app.api.chat import router as chat_router
 
-# 🔥 НОВІ ІМПОРТИ ДЛЯ ЛАЙКІВ:
 from app.schemas import FeedbackRequest
 from app.services.qdrant_service import QdrantService
 
@@ -26,7 +25,6 @@ app.add_middleware(
 
 app.include_router(chat_router, prefix=settings.API_PREFIX)
 
-# 🔥 НОВИЙ ЕНДПОІНТ ДЛЯ ЛАЙКІВ
 @app.post("/api/chat/feedback")
 def handle_feedback(req: FeedbackRequest):
     qdrant = QdrantService()

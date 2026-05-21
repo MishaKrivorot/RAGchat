@@ -3,7 +3,6 @@ from bs4 import BeautifulSoup
 from app.services.embeddings import EmbeddingService
 from app.services.qdrant_service import QdrantService
 
-# 🔥 Оновили статтю на актуальні лінки
 SCHEDULE_URLS = [
     {"title": "Розклад пар", "url": "https://rex.knu.ua/for-students/class-times/"},
     {"title": "Графік сесії", "url": "https://rex.knu.ua/grafik-sesiyi/"},
@@ -57,7 +56,7 @@ def rerank_by_keywords(query: str, results: list[dict]) -> list[dict]:
             if root in answer:
                 bonus += 0.02
 
-        # 🔥 РОЗУМНИЙ МАРШРУТИЗАТОР ПО ВУЗЛАХ САЙТУ
+        # РОЗУМНИЙ МАРШРУТИЗАТОР ПО ВУЗЛАХ САЙТУ
         url_mapping = {
             "вступ": ["for-entrance", "bachelors", "masters", "vstup", "entrance-rules"],
             "гуртожиток": ["dormitory"],
@@ -75,7 +74,6 @@ def rerank_by_keywords(query: str, results: list[dict]) -> list[dict]:
                 if any(path in url for path in paths) or keyword in title:
                     bonus += 0.25
 
-        # Залишаємо специфічні перевірки
         if any(w in query_norm for w in ["розклад", "сесі", "іспит", "перескладан", "залік"]):
             if any(u in url for u in ["class-times", "grafik-sesiyi", "grafiky-pereskladannya", "schedule"]) or \
                any(t in title for t in ["розклад", "сесія", "перескладання"]):
@@ -98,7 +96,7 @@ def rerank_by_keywords(query: str, results: list[dict]) -> list[dict]:
     return boosted
 
 # ==========================================
-# 🔥 ЛОГІКА LIVE-ПАРСИНГУ (В РЕАЛЬНОМУ ЧАСІ)
+# ЛОГІКА LIVE-ПАРСИНГУ
 # ==========================================
 def fetch_live_pdfs(url: str) -> str:
     """Парсить сторінку в реальному часі і дістає всі PDF-посилання"""
@@ -107,7 +105,6 @@ def fetch_live_pdfs(url: str) -> str:
         resp = requests.get(url, headers=headers, timeout=5)
         soup = BeautifulSoup(resp.text, 'lxml')
         
-        # Шукаємо основний контент
         main_block = soup.find('main') or soup.find('div', class_='entry-content') or soup.body
         if not main_block:
             return ""
@@ -115,10 +112,8 @@ def fetch_live_pdfs(url: str) -> str:
         pdf_links = []
         for a in main_block.find_all('a', href=True):
             href = a['href']
-            # Шукаємо всі посилання, що закінчуються на .pdf
             if href.lower().endswith('.pdf'):
                 text = a.get_text(strip=True) or "Документ"
-                # Додаємо форматування для LLM
                 pdf_links.append(f"• {text}: ({href})")
         
         return "\n".join(pdf_links)
@@ -141,7 +136,6 @@ def get_live_schedule_context() -> str:
             result_text += f"\n--- {title} ---\n{pdfs}\n"
             
     return result_text.strip()
-# ==========================================
 
 class RetrievalService:
     def __init__(self) -> None:
@@ -151,9 +145,8 @@ class RetrievalService:
     def retrieve(self, user_question: str) -> dict:
         query_vector = self.embedding_service.embed_text(user_question)
 
-        # 🔥 Спеціальна логіка для розкладу (LIVE PARSING)
+        # LIVE PARSING
         if is_schedule_query(user_question):
-            # 1. Пробуємо отримати розклад в реальному часі!
             live_text = get_live_schedule_context()
             
             if live_text:
@@ -171,9 +164,7 @@ class RetrievalService:
                     }],
                     "fallback_links": SCHEDULE_URLS
                 }
-            
-            # 2. Якщо сайт тимчасово не працює і live-парсинг не вдався, 
-            # шукаємо в нашій базі Qdrant (Fallback)
+             
             site_results = self.qdrant_service.search_site_only(
                 query_vector=query_vector,
                 limit=10,
@@ -187,7 +178,6 @@ class RetrievalService:
                 "fallback_links": SCHEDULE_URLS
             }
 
-        # Спеціальна логіка для освітніх програм
         if is_programs_query(user_question):
             site_results = self.qdrant_service.search_site_only(
                 query_vector=query_vector,
@@ -202,7 +192,6 @@ class RetrievalService:
                 "fallback_links": []
             }
 
-        # Загальний пошук
         results = self.qdrant_service.search_all(
             query_vector=query_vector,
             limit=15,

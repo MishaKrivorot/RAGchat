@@ -10,7 +10,6 @@ class QdrantService:
             api_key=settings.QDRANT_API_KEY
         )
 
-    # 🔥 універсальне створення
     def ensure_collection(self, collection_name: str, vector_size: int) -> None:
         collections = self.client.get_collections().collections
         names = [c.name for c in collections]
@@ -24,14 +23,12 @@ class QdrantService:
                 )
             )
 
-    # 🔥 старий метод залишаємо
     def recreate_collection(self, vector_size: int) -> None:
         self.client.recreate_collection(
             collection_name=settings.QDRANT_COLLECTION,
             vectors_config=VectorParams(size=vector_size, distance=Distance.COSINE)
         )
 
-    # 🔥 універсальний upsert
     def upsert_points(self, points: list[PointStruct], collection_name: str | None = None) -> None:
         collection = collection_name or settings.QDRANT_COLLECTION
 
@@ -40,7 +37,7 @@ class QdrantService:
             points=points
         )
 
-    # 🔥 пошук по конкретній колекції
+    # пошук по конкретній колекції
     def search(self, query_vector: list[float], limit: int = 3, collection_name: str | None = None):
         collection = collection_name or settings.QDRANT_COLLECTION
 
@@ -53,7 +50,7 @@ class QdrantService:
 
         return response.points
 
-    # 🔥 ОБ'ЄДНАНИЙ ПОШУК (FAQ + SITE)
+    # ОБ'ЄДНАНИЙ ПОШУК (FAQ + SITE)
     def search_all(
         self, query_vector: list[float], limit: int = 3,
         faq_min_score: float = 0.0, site_min_score: float = 0.0
@@ -73,7 +70,7 @@ class QdrantService:
                 "question": payload.get("question", payload.get("title", "")),
                 "answer": payload.get("text", payload.get("answer", "")),
                 "score": float(item.score),
-                "source_type": "site", # (або "site" для колекції сайту)
+                "source_type": "site",
                 "url": payload.get("url", ""),
                 "title": payload.get("title", "")
             })
@@ -85,18 +82,17 @@ class QdrantService:
                 continue
             payload = item.payload or {}
             results.append({
-                "id": item.id,                                   # <-- НОВЕ
+                "id": item.id,
                 "likes": payload.get("likes", 0),
-                "dislikes": payload.get("dislikes", 0),               # <-- НОВЕ
+                "dislikes": payload.get("dislikes", 0),
                 "question": payload.get("question", payload.get("title", "")),
                 "answer": payload.get("text", payload.get("answer", "")),
                 "score": float(item.score),
-                "source_type": "site", # (або "site" для колекції сайту)
+                "source_type": "site",
                 "url": payload.get("url", ""),
                 "title": payload.get("title", "")
             })
 
-        # 🔥 сортування
         results.sort(key=lambda x: x["score"], reverse=True)
 
         return results[: limit]
@@ -128,8 +124,7 @@ class QdrantService:
             with_payload=True
         )
         return records
-    # 🔥 НОВИЙ МЕТОД ДЛЯ ЛАЙКІВ
-    # 🔥 МЕТОД ДЛЯ ЛАЙКІВ ТА ДИЗЛАЙКІВ
+    # МЕТОД ДЛЯ ЛАЙКІВ ТА ДИЗЛАЙКІВ
     def submit_feedback(self, point_id: int | str, collection_name: str, action: str) -> dict:
         if isinstance(point_id, str) and point_id.isdigit():
             point_id = int(point_id)

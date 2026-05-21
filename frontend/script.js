@@ -37,7 +37,6 @@ function applyThemeIcon() {
   const isDark = document.body.classList.contains("dark");
   themeIcon.textContent = isDark ? "🌙" : "☀️";
 
-  // Змінюємо картинки залежно від теми
   const ship1 = document.getElementById("ship1");
   const ship2 = document.getElementById("ship2");
 
@@ -108,7 +107,7 @@ if (clearHistoryBtn) {
     if (confirm("Ви впевнені, що хочете очистити історію чату?")) {
       chatHistory = [];
       saveHistory();
-      messagesEl.innerHTML = ""; // Очищаємо екран
+      messagesEl.innerHTML = "";
       addMessage(
         "Історію очищено. Чим я можу допомогти?",
         "bot",
@@ -142,7 +141,6 @@ function buildSourcesHtml(sources) {
   let html = `<div class="sources"><div class="sources-title">Знайдені джерела</div>`;
 
   sources.forEach((source, index) => {
-    // Безпечне отримання значень
     const qText = escapeHtml(source.question || "Загальна інформація");
     const aText = escapeHtml(source.answer || "Відповіді немає");
     const scoreVal = Number(source.score || 0).toFixed(3);
@@ -185,7 +183,6 @@ function saveHistory() {
 
 function loadHistory() {
   if (chatHistory.length === 0) {
-    // Якщо історія порожня, додаємо привітання (але не зберігаємо його в пам'ять)
     addMessage(
       "Вітаю! Я чат-бот університету. Постав запитання щодо вступу, навчання, розкладу або документів.",
       "bot",
@@ -193,14 +190,12 @@ function loadHistory() {
       false
     );
   } else {
-    // Відмальовуємо збережені повідомлення
     chatHistory.forEach(msg => {
       renderMessageUI(msg.text, msg.who, msg.meta);
     });
   }
 }
 
-// Функція ТІЛЬКИ для відмальовки (без збереження)
 function renderMessageUI(text, who, meta) {
   const row = document.createElement("div");
   row.className = `msg-row ${who === "user" ? "user-row" : "bot-row"}`;
@@ -237,7 +232,6 @@ function renderMessageUI(text, who, meta) {
   scrollToBottom();
 }
 
-// Головна функція додавання повідомлення (відмальовка + збереження)
 function addMessage(text, who = "bot", meta = null, save = true) {
   renderMessageUI(text, who, meta);
   if (save) {
@@ -275,7 +269,6 @@ async function checkApi() {
     apiBadge.textContent = "API: checking...";
     apiBadge.style.color = "inherit";
 
-    // Додаємо timeout 5 секунд, щоб перевірка не зависала, якщо сервер спить
     const controller = new AbortController();
     const timeoutId = setTimeout(() => controller.abort(), 5000);
 
@@ -285,10 +278,10 @@ async function checkApi() {
     if (!resp.ok) throw new Error("API unavailable");
 
     apiBadge.textContent = "API: online";
-    apiBadge.style.color = "var(--success)"; // Зелений колір
+    apiBadge.style.color = "var(--success)";
   } catch {
     apiBadge.textContent = "API: offline";
-    apiBadge.style.color = "var(--danger)"; // Червоний колір
+    apiBadge.style.color = "var(--danger)";
   }
 }
 
@@ -376,10 +369,10 @@ loadHistory();
 
 /* ---------------- ФІДБЕК ---------------- */
 window.sendFeedback = async function (pointId, sourceType, action, btnElement) {
-  if (btnElement.classList.contains("acted")) return; // Захист від повтору
+  if (btnElement.classList.contains("acted")) return;
 
   const container = btnElement.parentElement;
-  Array.from(container.children).forEach(btn => btn.classList.add("acted")); // Блокуємо обидві кнопки
+  Array.from(container.children).forEach(btn => btn.classList.add("acted"));
 
   btnElement.style.background = action === 'like' ? 'rgba(74, 222, 128, 0.3)' : 'rgba(248, 113, 113, 0.3)';
 
@@ -392,7 +385,6 @@ window.sendFeedback = async function (pointId, sourceType, action, btnElement) {
 
     const data = await response.json();
 
-    // 🔥 Миттєво оновлюємо цифру на кнопці
     if (data.status === "success") {
       const span = btnElement.querySelector("span");
       if (span) {
@@ -409,42 +401,30 @@ const introScreen = document.getElementById("intro-screen");
 
 if (introScreen) {
   introScreen.addEventListener("click", () => {
-    // Плавно приховуємо екран
     introScreen.classList.add("hidden");
 
-    // Повністю видаляємо його з DOM через 600мс (після завершення анімації зникнення),
-    // щоб він не заважав клікати на елементи чату
     setTimeout(() => {
       introScreen.remove();
-      // Можна додати автофокус на поле вводу, щоб користувач одразу міг писати
       qInput.focus();
     }, 600);
   });
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-  // Вступна анімація мікросхеми (drawSignal, powerUp) триває приблизно 5с.
-  // Вмикаємо логіку імпульсів через 5.2с.
   setTimeout(() => {
     const pulseGroup = document.querySelector('.microchip-svg .pulses');
     if (pulseGroup) {
-      // Вмикаємо видимість усієї групи
       pulseGroup.style.display = 'block';
 
       const pulsePaths = pulseGroup.querySelectorAll('.signal-pulse');
 
       pulsePaths.forEach(pulse => {
-        // 🔥 Нові налаштування:
-        // Тривалість циклу: 15с (дуже довго, для рідкої появи)
         const duration = 15;
 
-        // Хаотична початкова затримка: від 0 до 12с.
-        // Це розподіляє появу імпульсів у часі, щоб вони не clump up.
         const randomDelay = (Math.random() * 12).toFixed(2);
 
-        // Застосовуємо анімацію runPulse
         pulse.style.animation = `runPulse ${duration}s ${randomDelay}s infinite linear`;
       });
     }
-  }, 2700); // Починаємо логіку після завершення вступу
+  }, 2700);
 });

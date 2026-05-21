@@ -6,7 +6,7 @@ def split_text(text: str, chunk_size: int = 900, overlap: int = 150) -> list[str
     if len(text) <= chunk_size:
         return [text]
 
-    # Розбиваємо текст на речення (за крапкою, знаком питання або окликом)
+    # Розбиваємо текст на речення
     sentences = re.split(r'(?<=[.!?])\s+', text)
     
     chunks = []

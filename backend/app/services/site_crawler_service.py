@@ -48,7 +48,7 @@ class SiteCrawlerService:
         for tag in soup(["script", "style", "noscript", "svg", "img", "form", "iframe"]):
             tag.decompose()
 
-        # 2. Видаляємо навігацію, меню, шапки та підвали
+        # 2. Видаляємо навігацію
         for selector in [
             "header", "footer", "nav", ".menu", ".navbar", ".sidebar",
             ".widget", ".breadcrumbs", ".search-form"
@@ -70,16 +70,15 @@ class SiteCrawlerService:
         main_block = next((item for item in main_candidates if item), soup.body or soup)
 
         if main_block:
-            # 🔥 4. Зберігаємо посилання у форматі "Текст (URL)"
+            # 4. Зберігаємо посилання у форматі "Текст (URL)"
             for a in main_block.find_all("a", href=True):
                 link_text = a.get_text(strip=True)
                 url = a["href"]
-                # Ігноруємо порожні тексти та внутрішні якорі сторінки
                 if link_text and not url.startswith("#"):
                     full_url = urljoin(self.base_url, url) 
                     a.string = f"{link_text} ({full_url})" 
 
-            # 5. Витягуємо чистий текст (вже з дописаними URL)
+            # 5. Витягуємо чистий текст з дописаними URL
             text = " ".join(main_block.stripped_strings)
             text = " ".join(text.split())
         else:
@@ -118,7 +117,6 @@ class SiteCrawlerService:
                 response.raise_for_status()
                 html = response.text
             except Exception as e:
-                # ТЕПЕР МИ БАЧИМО ПОМИЛКУ ЗАВАНТАЖЕННЯ СТОРІНКИ
                 print(f"❌ Помилка завантаження {current_url}: {e}")
                 visited.add(current_url)
                 continue
@@ -128,7 +126,6 @@ class SiteCrawlerService:
             try:
                 title, text = self._extract_text(html)
             except Exception as e:
-                # НА ВСЯКИЙ ВИПАДОК ДОДАВ ВИВІД І СЮДИ
                 print(f"❌ Помилка витягування тексту з {current_url}: {e}")
                 continue
 

@@ -59,16 +59,13 @@ body.light {
   z-index: -3;
 }
 
-/* 🔥 РОЗТЯГУВАННЯ ЕКРАНУ: Робимо сторінку Flex-контейнером на 100vh */
 .page {
   width: min(1000px, calc(100% - 32px));
   margin: 0 auto;
   display: flex;
   flex-direction: column;
   height: 100vh;
-  /* Займає всю висоту екрану браузера */
   padding: 3vh 0 4vh;
-  /* Адаптивні відступи зверху і знизу */
   position: relative;
   z-index: 1;
 }
@@ -77,12 +74,10 @@ body.light {
   text-align: center;
   margin-bottom: 14px;
   flex-shrink: 0;
-  /* Шапка не стискається */
 }
 
 .logo {
   width: 75px;
-  /* Зменшили логотип для економії місця */
   display: block;
   margin: 0 auto;
   filter: drop-shadow(0 0 10px rgba(73, 223, 242, 0.2));
@@ -132,7 +127,6 @@ body.light .comet {
     transform: translateX(-40vw);
   }
 
-  /* 🔥 ЗМІНА: Починає рух далеко за екраном, щоб не стрибало */
   100% {
     transform: translateX(120vw);
   }
@@ -154,7 +148,6 @@ body.light .comet {
   transform: scale(1.12);
 }
 
-/* 🔥 РОЗТЯГУВАННЯ ЧАТУ: Wrapper займає весь вільний простір */
 .chat-wrapper {
   max-width: 760px;
   width: 100%;
@@ -167,9 +160,7 @@ body.light .comet {
   display: flex;
   flex-direction: column;
   flex-grow: 1;
-  /* Тягнеться до низу */
   overflow: hidden;
-  /* Обрізає зайве */
 }
 
 body.dark .chat-wrapper {
@@ -223,10 +214,8 @@ body.light .api-badge {
   border: 1px solid rgba(0, 0, 0, 0.12);
 }
 
-/* 🔥 РОЗТЯГУВАННЯ ПОВІДОМЛЕНЬ: Автоматична висота замість фіксованих 430px */
 .messages {
   flex-grow: 1;
-  /* Розтягується на всю доступну висоту */
   overflow-y: auto;
   padding: 14px;
   border-radius: 14px;
@@ -373,7 +362,6 @@ body.light .source-card {
   padding: 13px 14px;
   border-radius: 12px;
   font-size: 16px;
-  /* 🔥 ВАЖЛИВО: 16px запобігає авто-зуму на iPhone */
   outline: none;
   transition: border-color 0.2s, background 0.2s, opacity 0.2s;
 }
@@ -770,19 +758,16 @@ body.dark .msg-text a:visited {
 
 
 /* ========================================= */
-/* 🔥 АДАПТАЦІЯ ПІД МОБІЛЬНІ ПРИСТРОЇ        */
+/*    АДАПТАЦІЯ ПІД МОБІЛЬНІ ПРИСТРОЇ        */
 /* ========================================= */
 @media (max-width: 768px) {
   .page {
     width: 100%;
-    /* На весь екран */
     padding: 2vh 12px 2vh;
-    /* Менші відступи по краях */
   }
 
   .logo {
     width: 55px;
-    /* Ще менше лого */
     margin-bottom: 8px;
   }
 
@@ -793,7 +778,6 @@ body.dark .msg-text a:visited {
 
   .chat-topbar {
     flex-direction: row;
-    /* Залишаємо бейдж і текст в один ряд */
     align-items: flex-start;
     gap: 8px;
     margin-bottom: 10px;
@@ -801,7 +785,6 @@ body.dark .msg-text a:visited {
 
   .chat-topbar h2 {
     font-size: 16px;
-    /* Менший заголовок */
     margin-bottom: 4px;
   }
 
@@ -824,7 +807,6 @@ body.dark .msg-text a:visited {
 
   .msg {
     max-width: 95%;
-    /* Повідомлення можуть бути ширшими на телефоні */
     padding: 10px 12px;
     font-size: 14px;
     border-radius: 12px;
@@ -836,19 +818,16 @@ body.dark .msg-text a:visited {
 
   .chat-form {
     flex-direction: row;
-    /* 🔥 ВАЖЛИВО: Поле і кнопка в один рядок */
     gap: 8px;
   }
 
   .chat-form input {
     padding: 12px 14px;
     font-size: 16px;
-    /* Захист від зуму на iOS */
   }
 
   .chat-form button {
     min-width: 90px;
-    /* Зменшуємо кнопку */
     padding: 12px 14px;
     font-size: 14px;
   }
@@ -898,7 +877,6 @@ body.light .action-btn:hover {
   background: rgba(0, 0, 0, 0.05);
 }
 
-/* Налаштування кнопки відправки для десктопу */
 .btn-icon {
   display: none;
 }

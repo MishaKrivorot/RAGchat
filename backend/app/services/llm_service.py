@@ -166,7 +166,6 @@ class LLMService:
                 )
                 answer = response.choices[0].message.content.strip()
                 
-                # 🔥 ФІЛЬТР ВІДМОВ LLM: Якщо модель каже "не бачу", "не можу" - відкидаємо
                 bad_phrases = ["не бачу", "не можу", "надішліть", "відсутній", "не містить"]
                 if any(phrase in answer.lower() for phrase in bad_phrases):
                     return ""

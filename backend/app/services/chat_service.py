@@ -3,35 +3,33 @@ from datetime import datetime
 from app.config import settings
 from app.services.llm_service import LLMService
 from app.services.retrieval_service import RetrievalService
-from app.services.web_search_service import WebSearchService  # Сервіс веб-пошуку
+from app.services.web_search_service import WebSearchService
 from app.utils.greetings import is_greeting, greeting_response
 
 # ==========================================
-# 🔥 АНАЛІТИКА СЛІПИХ ЗОН
+#  АНАЛІТИКА СЛІПИХ ЗОН
 # ==========================================
 def log_unanswered_query(query: str):
     """Фіксує запити, на які бот не зміг знайти відповідь"""
     timestamp = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
     log_message = f"[{timestamp}] UNANSWERED: {query}"
     
-    # 1. Виводимо в консоль (Надійно зберігається у логах Railway)
     print(f"🚨 {log_message}", flush=True)
     
-    # 2. Зберігаємо у файл (Для зручності локального тестування)
     try:
         os.makedirs("data", exist_ok=True)
         with open("data/unanswered_queries.log", "a", encoding="utf-8") as f:
             f.write(log_message + "\n")
     except Exception as e:
         print(f"Не вдалося записати в лог-файл: {e}")
-# ==========================================
+
 
 
 class ChatService:
     def __init__(self) -> None:
         self.retrieval_service = RetrievalService()
         self.llm_service = LLMService() if settings.USE_LLM else None
-        self.web_search = WebSearchService()  # Ініціалізація веб-пошуку
+        self.web_search = WebSearchService()
 
     def handle_question(self, question: str) -> dict:
         if is_greeting(question):
@@ -66,7 +64,7 @@ class ChatService:
         top_score = results[0].get("reranked_score", results[0].get("score", 0.0)) if results else 0.0
         min_score = settings.SIMILARITY_THRESHOLD
 
-        # 🔥 FALLBACK (ВЕБ-ПОШУК ТА СЛІПІ ЗОНИ)
+        # FALLBACK
         if not results or top_score < min_score:
             web_results = self.web_search.search(search_question, limit=3)
 
@@ -74,7 +72,6 @@ class ChatService:
                 try:
                     answer = self.llm_service.generate_web_answer(question, web_results)
                     
-                    # Маскуємо результати під стандартні "джерела"
                     formatted_web_sources = [
                         {
                             "question": f"Знайдено в мережі: {r['title']}",
@@ -92,10 +89,8 @@ class ChatService:
                         "fallback_links": fallback_links
                     }
                 except Exception as e:
-                    pass # Якщо помилка LLM, йдемо до генерації відмови
+                    pass
 
-            # 🚨 ЯКЩО МИ ДІЙШЛИ СЮДИ — ВІДПОВІДІ НЕМАЄ НІДЕ!
-            # Фіксуємо цей запит в аналітику
             log_unanswered_query(question)
 
             if settings.USE_LLM and self.llm_service:
@@ -125,8 +120,6 @@ class ChatService:
                 "fallback_links": fallback_links
             }
 
-
-        # --- СТАРА ЛОГІКА ДЛЯ ЛОКАЛЬНОЇ БАЗИ (ЯКЩО ВПЕВНЕНІСТЬ ВИСОКА) ---
         sources = results
         second_score = sources[1].get("reranked_score", sources[1].get("score", 0.0)) if len(sources) > 1 else 0.0
         score_gap = top_score - second_score

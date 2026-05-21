@@ -1,5 +1,5 @@
 from pydantic import BaseModel, Field
-from typing import List, Optional, Union # Додали Union
+from typing import List, Optional, Union
 
 
 class QueryRequest(BaseModel):
@@ -10,7 +10,7 @@ class QueryRequest(BaseModel):
 class SourceItem(BaseModel):
     id: Union[str, int, None] = None
     likes: int = 0
-    dislikes: int = 0                    # <--- ДОДАЛИ ДИЗЛАЙКИ
+    dislikes: int = 0
     question: Optional[str] = ""
     answer: str
     score: float

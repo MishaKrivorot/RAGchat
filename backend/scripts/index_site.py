@@ -13,7 +13,7 @@ START_URLS = [
     # --- ГОЛОВНА ТА ФАКУЛЬТЕТ ---
     "https://rex.knu.ua/",
     "https://rex.knu.ua/faculty/about-us/",               # Про факультет
-    "https://rex.knu.ua/faculty/deans-office/",           # Деканат (актуальне посилання)
+    "https://rex.knu.ua/faculty/deans-office/",           # Деканат
     "https://rex.knu.ua/faculty/departments/",            # Кафедри факультету
     
     # --- ДЛЯ ВСТУПНИКІВ (АБІТУРІЄНТІВ) ---
@@ -27,14 +27,14 @@ START_URLS = [
     
     # --- ДЛЯ СТУДЕНТІВ ---
     "https://rex.knu.ua/for-students/",                   # Головна сторінка студента
-    "https://rex.knu.ua/for-students/class-times/",       # Розклад пар (замість старого schedule)
+    "https://rex.knu.ua/for-students/class-times/",       # Розклад пар
     "https://rex.knu.ua/grafik-sesiyi/",                  # Графік сесії
     "https://rex.knu.ua/grafiky-pereskladannya/",         # Графіки перескладання
     "https://rex.knu.ua/for-students/dormitory/",         # Гуртожиток
     "https://rex.knu.ua/for-students/books-for-study/",   # Навчальні матеріали
-    "https://rex.knu.ua/for-students/student-organizations/", # Студентські організації (Студпарламент тощо)
+    "https://rex.knu.ua/for-students/student-organizations/", # Студентські організації
     
-    # Можливі додаткові сторінки (якщо у вас є налаштовані контакти на сайті)
+    # Додаткові сторінки
     "https://rex.knu.ua/contacts/"                        # Загальні контакти
 ]
 
@@ -48,7 +48,7 @@ def main():
     embedding_service = EmbeddingService()
     qdrant_service = QdrantService()
     crawler = SiteCrawlerService()
-    llm_service = LLMService() # <-- Ініціалізуємо LLM
+    llm_service = LLMService()
 
     pages = crawler.crawl(START_URLS)
 
@@ -89,7 +89,7 @@ def main():
                 "title": page["title"],
                 "chunk_index": idx,
                 "text": chunk,
-                "question": generated_questions, # <-- Тепер тут згенеровані питання!
+                "question": generated_questions,
                 "answer": chunk
             }
 
@@ -103,7 +103,6 @@ def main():
             total_chunks += 1
             print(f"Оброблено чанк {total_chunks}...")
             
-            # Робимо мікро-паузу, щоб не отримати бан від Groq API за кількість запитів (Rate Limit)
             time.sleep(1.5) 
 
     if points:
